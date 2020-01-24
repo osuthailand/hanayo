@@ -23,6 +23,12 @@ var reviews = [
     avatar: "https://a.ainu.pw/1023",
     link: "https://ainu.pw/u/1023",
     review: "most fun i've had playing osu has been on this server would recommend"
+    },
+    {
+    name: "KeepSOBP",
+    avatar: "https://a.ainu.pw/1329",
+    link: "https://ainu.pw/u/1329",
+    review: "Please register ainu so you can get country rank #1 faster OOF"
     }
 ];
 var review = reviews[Math.floor(Math.random() * 4)];
@@ -59,6 +65,12 @@ var quotes = [
     avatar:  "https://a.ainu.pw/1178",
     link: "https://ainu.pw/u/1178",
     review: "welcome to ainu please like and subscribe then comment down below"
+    },
+    {
+    name: "Kiyushi",
+    avatar: "https://a.ainu.pw/1538",
+    link: "https://ainu.pw/u/1538",
+    review: "<3"
     }
 ];
 var quote = quotes[Math.floor(Math.random() * 2)];
@@ -95,6 +107,12 @@ var quotes = [
     avatar:  "https://a.ainu.pw/1447",
     link: "https://ainu.pw/u/1447",
     review: "epic server with epic people, should totally join 11/10"
+    },
+    {
+    name: "linsonder6",
+    avatar: "https://a.ainu.pw/1494",
+    link: "https://ainu.pw/u/1494",
+    review: "Join now for free Tesla cybertruck"
     }
 ];
 var quote = quotes[Math.floor(Math.random() * 3)];
