@@ -31,7 +31,7 @@ var reviews = [
     review: "Please register ainu so you can get country rank #1 faster OOF"
     }
 ];
-var review = reviews[Math.floor(Math.random() * 4)];
+var review = reviews[Math.floor(Math.random() * 5)];
 document.getElementById("review").innerHTML =
     '<a href="' + review.link + '" class="reivew-avatar" style="background-image: url(' + review.avatar + ')"></a>' +
     '<div class="review-content">' +
@@ -73,7 +73,7 @@ var quotes = [
     review: "<3"
     }
 ];
-var quote = quotes[Math.floor(Math.random() * 2)];
+var quote = quotes[Math.floor(Math.random() * 5)];
 document.getElementById("review-row-3").innerHTML =
     '<a href="' + quote.link + '" class="reivew-avatar" style="background-image: url(' + quote.avatar + ')"></a>' +
     '<div class="review-content">' +
@@ -115,7 +115,7 @@ var quotes = [
     review: "Join now for free Tesla cybertruck"
     }
 ];
-var quote = quotes[Math.floor(Math.random() * 3)];
+var quote = quotes[Math.floor(Math.random() * 5)];
 document.getElementById("review-row-2").innerHTML =
     '<a href="' + quote.link + '" class="reivew-avatar" style="background-image: url(' + quote.avatar + ')"></a>' +
     '<div class="review-content">' +
