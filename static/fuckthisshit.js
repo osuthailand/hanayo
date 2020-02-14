@@ -29,9 +29,21 @@ var reviews = [
     avatar: "https://a.ainu.pw/1329",
     link: "https://ainu.pw/u/1329",
     review: "Please register ainu so you can get country rank #1 faster OOF"
+    },
+    {
+    name: "Phirse",
+    avatar: "https://a.ainu.pw/1356",
+    link: "https://ainu.pw/u/1356",
+    review: "hi"
+    },
+    {
+    name: "Vaxxine",
+    avatar:  "https://a.ainu.pw/1663",
+    link: "https://ainu.pw/u/1663",
+    review: "This is a really good server I hope there will be more players in the future :))"
     }
 ];
-var review = reviews[Math.floor(Math.random() * 5)];
+var review = reviews[Math.floor(Math.random() * 7)];
 document.getElementById("review").innerHTML =
     '<a href="' + review.link + '" class="reivew-avatar" style="background-image: url(' + review.avatar + ')"></a>' +
     '<div class="review-content">' +
@@ -55,7 +67,7 @@ var quotes = [
     review: "ainu very good and epic and stuff yes"
     },
     {
-    name: "slurry",
+    name: "Doppler",
     avatar:  "https://a.ainu.pw/1367",
     link: "https://ainu.pw/u/1367",
     review: "Best server you'll ever find"
@@ -71,9 +83,15 @@ var quotes = [
     avatar: "https://a.ainu.pw/1538",
     link: "https://ainu.pw/u/1538",
     review: "<3"
+    },
+    {
+    name: "susanoo",
+    avatar: "https://a.ainu.pw/1627",
+    link: "https://ainu.pw/u/1627",
+    review: "_HIDDEN_ is a cool player and is the only person who is nice to me"
     }
 ];
-var quote = quotes[Math.floor(Math.random() * 5)];
+var quote = quotes[Math.floor(Math.random() * 6)];
 document.getElementById("review-row-3").innerHTML =
     '<a href="' + quote.link + '" class="reivew-avatar" style="background-image: url(' + quote.avatar + ')"></a>' +
     '<div class="review-content">' +
@@ -109,13 +127,19 @@ var quotes = [
     review: "epic server with epic people, should totally join 11/10"
     },
     {
-    name: "linsonder6",
-    avatar: "https://a.ainu.pw/1494",
-    link: "https://ainu.pw/u/1494",
-    review: "Join now for free Tesla cybertruck"
+    name: "Rulehd",
+    avatar: "https://a.ainu.pw/1038",
+    link: "https://ainu.pw/u/1038",
+    review: "best server."
+    },
+    {
+    name: "Hakura",
+    avatar: "https://a.ainu.pw/1231",
+    link: "https://ainu.pw/u/1231",
+    review: "Tangmo with a gun (jk btw it's nice server : )"
     }
 ];
-var quote = quotes[Math.floor(Math.random() * 5)];
+var quote = quotes[Math.floor(Math.random() * 6)];
 document.getElementById("review-row-2").innerHTML =
     '<a href="' + quote.link + '" class="reivew-avatar" style="background-image: url(' + quote.avatar + ')"></a>' +
     '<div class="review-content">' +
