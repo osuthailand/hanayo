@@ -60,5 +60,6 @@ func setCountry(c *gin.Context, user int) error {
 		return nil
 	}
 	db.Exec("UPDATE users_stats SET country = ? WHERE id = ?", country, user)
+	db.Exec("UPDATE rx_stats SET country = ? WHERE id = ?", country, user)
 	return nil
 }

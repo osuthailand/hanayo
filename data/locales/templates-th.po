@@ -354,20 +354,35 @@ msgstr "หน้าแรก"
 msgid "Leaderboard"
 msgstr "กระดานคะแนน"
 
+msgid "Community"
+msgstr "ชุมชน"
+
+msgid "Multiplayer listing"
+msgstr "รายชื่อห้องเล่นหลายคน"
+
+msgid "Discord Server"
+msgstr "เซิร์ฟเวอร์ดิสคอร์ด"
+
 msgid "Help"
 msgstr "ขอความช่วยเหลือ"
 
 msgid "About"
 msgstr "เกี่ยวกับเรา"
 
-msgid "osu!Ainu! Discord"
-msgstr "ดิสคอร์ดเซิร์ฟ osu!thailand"
-
-msgid "osu!kawata Discord"
-msgstr "ดิสคอร์ดเซิร์ฟ Kawata"
-
 msgid "Beatmaps"
 msgstr "บีทแมพ"
+
+msgid "Clans"
+msgstr "แคลน"
+
+msgid "Clan Leaderboard"
+msgstr "กระดานแคลน"
+
+msgid "Create Clan"
+msgstr "สร้างแคลน"
+
+msgid "Clan Settings"
+msgstr "การตั้งค่าแคลน"
 
 msgid "Donate"
 msgstr "โดเนท"
@@ -380,6 +395,9 @@ msgstr "โปรไฟล์"
 
 msgid "Friends"
 msgstr "เพื่อน"
+
+msgid "Your Followers"
+msgstr "ผู้ติดตามของคุณ"
 
 msgid "Settings"
 msgstr "การตั้งค่า"

@@ -9,34 +9,102 @@ KyutGrill=homepage2.jpg
 {{ $   := . }}
 
 <div class="ui container">
-	<div class="ui center aligned segment">
-		<img src="/static/logos/ainu.png">
+<div class="ui center aligned segment">
+	<img src="/static/logos/ainu.png">
+</div>
+{{ $set := systemSettings "website_home_alert" }}
+{{ with $set.website_home_alert.String }}
+	<div class="ui warning message">
+		{{ . | html }}
 	</div>
-	{{ $set := systemSettings "website_home_alert" }}
-	{{ with $set.website_home_alert.String }}
-		<div class="ui warning message">
-			{{ . | html }}
+{{ end }}
+<style>
+.reviews {
+display: flex;
+flex-direction: column;
+margin-top: 20px;
+}
+.text-h2 {
+font-size: 32px;
+font-weight: 700;
+color: white;
+margin-bottom: 10px;
+}	
+.reviews-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 10px;
+	row-gap: 1em;
+}
+.review-single {
+	background-color: rgb(0,0,0,.47);
+	border-radius: 4px;
+	box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.11);
+	padding: 20px;
+	display: flex;
+}
+.reivew-avatar {
+	width: 44px;
+	height: 44px;
+	background-color: black;
+	background-size: cover;
+	border-radius: 200px;
+}
+.review-content {
+	margin-left: 13px;
+	display: flex;
+	flex-direction: column;
+}
+.review-text {
+	font-size: 14px;
+	line-height: 19px;
+	color: #DCDCDC;
+	max-width: 253px;
+}
+.text-h3 {
+	font-size: 20px;
+	color: white;
+	font-weight: 700;
+	line-height: 1;
+	margin-bottom: 8px;
+}	
+</style>
+<div class="ui container">
+	<div class="reviews">
+		<span class="ui header"> Reviews </span>
+		<div class="col-lg-12">
+			<div class="reviews-row">
+				<div id="review" class="review-single">
+				</div>
+				<div id="review-row-2" class="review-single">
+				</div>
+				<div id="review-row-3" class="review-single">
+				</div>
+			</div>
 		</div>
+	</div>
+</div>
+<script type="text/javascript " src="/static/fuckthisshit.js?{{ unixNano }}"></script>
+
+{{/* Not logged in block */}}
+{{ if not .Context.User.ID }}
+	<div class="ui segment">
+		<h1 class="ui header">{{ .T "Welcome to Ainu!" }}</h1>
+		<p>
+			{{ .T "You look new here. Allow us to introduce you to what Ainu! is." }}
+		</p>
+		<p>
+			{{ .T "Ainu! is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand'>open source!</a> Just so you know, <b>we currently have %s users online and %s registered users!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
+		</p>
+		<h3 class="ui header center aligned">{{ .T "What are you waiting for? Join Ainu!! It's risk-free: you won't get your account banned on the official server if you play on Ainu!<br>You can also switch anytime between the official osu! server and Ainu!!" | html }}</h3>
+	</div>
+{{ else }}
+	<div class="ui segment">
+		<h1 class="ui header">{{ .T "Howdy, %s!" .Context.User.Username }}</h1>
+		<p>
+			{{ $OnlineUsers := .Get "https://c.ainu.pw/api/v1/onlineUsers" }}
+			{{ .T "Welcome back to Ainu! We currently have <b>%s online users and %s total registered users.</b> Nice day to farm a few maps, isn't it?" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
+		</p>
+	</div>
 	{{ end }}
-	{{/* Not logged in block */}}
-	{{ if not .Context.User.ID }}
-		<div class="ui segment">
-			<h1 class="ui header">{{ .T "Welcome to Ainu!" }}</h1>
-			<p>
-				{{ .T "You look new here. Allow us to introduce you to what Ainu! is." }}
-			</p>
-			<p>
-				{{ .T "Ainu! is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand'>open source!</a> Just so you know, <b>we currently have %s users online and %s registered users!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
-			</p>
-			<h3 class="ui header center aligned">{{ .T "What are you waiting for? Join Ainu!! It's risk-free: you won't get your account banned on the official server if you play on Ainu!<br>You can also switch anytime between the official osu! server and Ainu!!" | html }}</h3>
-		</div>
-	{{ else }}
-		<div class="ui segment">
-			<h1 class="ui header">{{ .T "Howdy, %s!" .Context.User.Username }}</h1>
-			<p>
-				{{ $OnlineUsers := .Get "https://c.ainu.pw/api/v1/onlineUsers" }}
-				{{ .T "Welcome back to Ainu! We currently have <b>%s online users and %s total registered users.</b> Nice day to farm a few maps, isn't it?" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
-			</p>
-		</div>
-		{{ end }}
-		{{ end }}
+{{ end }}
