@@ -41,9 +41,15 @@ var reviews = [
     avatar:  "https://a.ainu.pw/1663",
     link: "https://ainu.pw/u/1663",
     review: "This is a really good server I hope there will be more players in the future :))"
+    },
+    {
+    name: "Sonic",
+    avatar:  "https://a.ainu.pw/1649",
+    link: "https://ainu.pw/u/1649",
+    review: "Thanks to Ainu, the police started a missing search!"
     }
 ];
-var review = reviews[Math.floor(Math.random() * 7)];
+var review = reviews[Math.floor(Math.random() * 8)];
 document.getElementById("review").innerHTML =
     '<a href="' + review.link + '" class="reivew-avatar" style="background-image: url(' + review.avatar + ')"></a>' +
     '<div class="review-content">' +
@@ -88,10 +94,22 @@ var quotes = [
     name: "susanoo",
     avatar: "https://a.ainu.pw/1627",
     link: "https://ainu.pw/u/1627",
-    review: "_HIDDEN_ is a cool player and is the only person who is nice to me"
+    review: "good server keep up"
+    },
+    {
+    name: "TBG",
+    avatar: "https://a.ainu.pw/1520",
+    link: "https://ainu.pw/u/1520",
+    review: "good server keep up"
+    },
+    {
+    name: "oh no",
+    avatar:  "https://a.ainu.pw/1669",
+    link: "https://ainu.pw/u/1669",
+    review: "ok now this server is epic"
     }
 ];
-var quote = quotes[Math.floor(Math.random() * 6)];
+var quote = quotes[Math.floor(Math.random() * 8)];
 document.getElementById("review-row-3").innerHTML =
     '<a href="' + quote.link + '" class="reivew-avatar" style="background-image: url(' + quote.avatar + ')"></a>' +
     '<div class="review-content">' +
@@ -137,9 +155,15 @@ var quotes = [
     avatar: "https://a.ainu.pw/1231",
     link: "https://ainu.pw/u/1231",
     review: "Tangmo with a gun (jk btw it's nice server : )"
+    },
+    {
+    name: "__",
+    avatar: "https://a.ainu.pw/1206",
+    link: "https://ainu.pw/u/1206",
+    review: "great server, helped me get my life support back"
     }
 ];
-var quote = quotes[Math.floor(Math.random() * 6)];
+var quote = quotes[Math.floor(Math.random() * 7)];
 document.getElementById("review-row-2").innerHTML =
     '<a href="' + quote.link + '" class="reivew-avatar" style="background-image: url(' + quote.avatar + ')"></a>' +
     '<div class="review-content">' +
