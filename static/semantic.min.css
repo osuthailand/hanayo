@@ -205,7 +205,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   min-width: 320px;
-  background: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/SHX5arbLxixqdx0ls/videoblocks-white-polygonal-surface-waving-with-dof-abstract-geometrical-modern-triangle-polygon-realistic-4k-animation_ha0hlvcjw_thumbnail-full01.png") no-repeat center fixed !important;
+  background: url("https://wallpapercave.com/wp/wp3595708.jpg") no-repeat center fixed !important;
   font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
   font-size: 14px;
   line-height: 1.4285em;
@@ -11774,7 +11774,7 @@ ol.ui.list li[value]:before {
 
 .ui.segment {
   position: relative;
-  background: rgba(0,0,0,.37);
+  background: rgba(34,34,34);
   box-shadow: 0 1px 35px 0 rgba(34,36,38,1);
   margin: 1rem 0;
   padding: 1em;
@@ -14747,7 +14747,7 @@ ol.ui.list li[value]:before {
 
 .ui.menu .ui.dropdown .menu>.item:hover,.ui.menu .ui.dropdown .menu>.selected.item {
   background: rgba(0,0,0,.05)!important;
-  color: rgba(0,0,0,.95)!important;
+  color: rgba(255, 255, 255, 0.95)!important;
 }
 
 .ui.menu .ui.dropdown .menu>.active.item {
@@ -14875,7 +14875,7 @@ ol.ui.list li[value]:before {
 .ui.link.menu .item:hover,.ui.menu .dropdown.item:hover,.ui.menu .link.item:hover,.ui.menu a.item:hover {
   cursor: pointer;
   background: rgba(0,0,0,.03);
-  color: rgba(0,0,0,.95);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .ui.link.menu .item:active,.ui.menu .link.item:active,.ui.menu a.item:active {
@@ -14896,7 +14896,7 @@ ol.ui.list li[value]:before {
 
 .ui.menu .active.item:hover,.ui.vertical.menu .active.item:hover {
   background-color: rgba(0,0,0,.05);
-  color: rgba(0,0,0,.95);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .ui.menu .item.disabled,.ui.menu .item.disabled:hover {
@@ -15229,7 +15229,7 @@ ol.ui.list li[value]:before {
 
 .ui.secondary.menu .dropdown.item:hover,.ui.secondary.menu .link.item:hover,.ui.secondary.menu a.item:hover {
   background: rgba(0,0,0,.05);
-  color: rgba(0,0,0,.95);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .ui.secondary.menu .active.item {
@@ -15242,7 +15242,7 @@ ol.ui.list li[value]:before {
 .ui.secondary.menu .active.item:hover {
   box-shadow: none;
   background: rgba(0,0,0,.05);
-  color: rgba(0,0,0,.95);
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .ui.secondary.inverted.menu .link.item,.ui.secondary.inverted.menu a.item {

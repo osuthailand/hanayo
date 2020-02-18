@@ -24,11 +24,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>{{ if .TitleBar }}{{ .T .TitleBar }}{{ end }} {{ .T "- Ainu" }}</title>
+		<title>{{ .T "Cooler!Tournament" }}</title>
 
 		<link rel="stylesheet" type="text/css" href="/static/{{ if $ds }}dark/{{ end }}semantic.min.css?{{ unixNano }}">
 		<link rel="stylesheet" type="text/css" href="/static/ripple.css?{{ unixNano }}">
-		
+
 		<!-- style type="text/css">
 	html, body {
 		overflow:hidden;
@@ -51,14 +51,6 @@
 				style="background-color: {{ .SolidColour }}"
 			{{ end }}>
 			{{ template "navbar" . }}
-			{{ if not .DisableHH }}
-				<div class="huge heading {{ if .HeadingOnRight }}right{{ end }} dropped"
-					style="background-image: url('{{ if .KyutGrillAbsolute }}{{ .KyutGrill }}{{ else }}/static/headers/{{ or .KyutGrill "default.jpg" }}{{ end }}');">
-					<div class="ui container">
-						<h1>{{ if .HeadingTitle }}{{ .T .HeadingTitle | html }}{{ else }}{{ .T .TitleBar }}{{ end }}</h1>
-					</div>
-				</div>
-			{{ end }}
 
 			<div class="h-container">
 				<div class="ui margined container" id="messages-container">
@@ -84,46 +76,80 @@
 				{{ end }}
 				{{ with $settings.game_maintenance.Int }}
 					<div class="ui warning message">
-						{{ $.T "Ainu!'s score submission is currently in maintenance mode. You will not be allowed to submit scores for the time being." }}
+						{{ $.T "ตอนนี้ระบบ Sumbit ยังใช้ไม่ได้ตอนนี้นะ รอก่อนเด้อ ทางทีมงานกำลังแก้ให้น้าาา" }}
 					</div>
 				{{ end }}
 				{{ with $settings.website_maintenance.Int }}
 					<div class="ui warning message">
-						{{ $.T "The Ainu! website is currently in maintenance mode. Only certain users are allowed to access the full website." }}
+						{{ $.T "ตอนนี้เว็ปไซด์ยังปรับปรุงอยู่นะ ทีมงานสามารถเข้าได้เท่านั้นนะ อดใจรอไปก่อนเด้อ" }}
 					</div>
 				{{ end }}
 				</div>
 				{{ template "tpl" . }}
 			</div>
-<p>
-<br />
-		<center><div class="footer twemoji">
-			
-			<font style='color:black'>
-			{{ if $ds }}<font style='color:white' >{{ end }}
-			{{ .T "&copy; 2018-%d Ripple, osu!Ainu, Made with love by Aoba ❤ using Hanayo %s" (curryear) (version) | html }}  |
-			<div class="ui scrolling dropdown" style="margin-left: 5px;" id="language-selector">
-				{{ $lang := .Context.Language }}
-				{{ with $lang }}
-					{{ $info := languageInformationByNameShort . }}
-					<div class="text"><i class="{{ with $lang }}{{ . }}{{end}} flag"></i>{{ $info.Name }}</div>
-				{{ else }}
-					<div class="default text">{{ .T "Language" }}</div>
-				{{ end }}
-				<i class="dropdown icon"></i>
-				<div class="menu">
-					{{ range languageInformation }}
-						<div class="{{ if eq .NameShort $lang }}selected {{ end }}item" data-lang="{{ .NameShort }}"><i class="{{ .CountryShort }} flag"></i>{{ .Name }}</div>
-					{{ end }}
+			<p>
+      <div class="footer-bg">
+				<div class="ui container">
+					<div class="ui internally celled grid">
+						<div class="row">
+							<div class="three wide column">
+								<div class="footer-info-block">
+									<a class="footer-title">ช่วยเหลือ</a>
+									<ul style="list-style-type: none; padding: 0; margin: 0;">
+										<li>
+										</li>
+										<li>
+											<i><a href="/team">ทีม/นักพัฒนา</a></i>
+										</li>
+										<li>
+											<i><a href="">วิธีการเข้าการแข่งขัน</a></i>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="three wide column">
+								<div class="footer-info-block">
+									<a class="footer-title">ช่องพูดคุย</a>
+									<ul style="list-style-type: none; padding: 0; margin: 0;">
+										<li>
+											<i><a href="https://discord.gg/uAGHjr9" target="_blank">ดิสคอร์ด</a></i>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="seven wide column">
+								<div class="footer-info-block">
+									<a class="footer-title">ภาษาไทยแปลไม่หมด</a>
+									<ul style="list-style-type: none; padding: 0; margin: 0;">
+										<li>
+										<div class="ui scrolling dropdown" id="language-selector">
+											{{ $lang := .Context.Language }}
+                      {{ with $lang }}
+                      {{ $info := languageInformationByNameShort . }}
+											<i><a>คนไทย กดที่นี่จ่ะ</a></i>
+                       {{ else }}
+											<div class="default text">{{ .T "คลิกที่นี้แล้วเลือกภาษาไทย เพื่อแก้ภาษา" }}</div>
+											{{ end }}
+                        <div class="menu">
+                        <div class="th item" data-lang="th"><i class="th flag"></i>กดเราโหน่ยยย</div>
+                       </div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="footer-logo">
+								<span>Cooler!Tournament</span>
+								<br>
+								<a class="subtitle"> thailand first tournament server</a>
+							</div>
+						</div>
+					</div>
 				</div>
-				</div>
-			</font>
-		</div>
-		</center>
+			</div>
 		<script>
 			var hanayoConf = {
 				avatars:   {{ .Conf.AvatarURL }},
-				banchoAPI: {{ .Conf.BanchoAPIPublic }},
+				banchoAPI: {{ .Conf.BanchoAPI }},
 				baseAPI:   {{ .Conf.BaseAPIPublic }},
 				cheesegullAPI: {{ .Conf.CheesegullAPI }},
 				language:  {{ with $lang }}{{ . }}{{ else }}"en"{{ end }},
@@ -139,7 +165,7 @@
 				<script src="{{ . }}?{{ unixNano }}"></script>
 			{{ end }}
 		{{ end }}
-		
+
 		    <!-- JavaScript
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/static/jquery-1.10.2.min.js"><\/script>')</script>

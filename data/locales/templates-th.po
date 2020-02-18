@@ -15,8 +15,8 @@ msgstr ""
 "X-Pootle-Revision: 8354\n"
 
 # Title
-msgid "- Ainu"
-msgstr "- osu!thailand"
+msgid "Cooler!Tournament"
+msgstr "การแข่งขัน Coolermaster"
 
 # General
 msgid "You're already logged in!"
@@ -397,8 +397,8 @@ msgstr "หน้าหลัก"
 msgid "Welcome to Ainu!"
 msgstr "ยินดีต้อนรับเข้าสู่ osu!thailand"
 
-msgid "Ainu! is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand'>open source!</a> Just so you know, <b>we currently have %s users online and %s registered users!</b>"
-msgstr "osu!thailand คือเซิร์ฟเวอร์ osu! เถื่อน (ไม่ได้ป่าเถื่อนนะ แต่ไม่รู้ว่าจะใช้คำว่าอะไรละ) ซึ่งมีระบบเล่นหลายคน, PP, และชุมชนที่โคตรจะมีชีวิต (ประมาณว่ามีคนคุย/เล่นกันเยอะอะนะ) และทีมงานสรรหาระบบใหม่ๆเข้าเซิร์ฟเวอร์! <a href='/about'>ลองไปดูว่าอะไรคือเซิร์ฟนี้ก็ได้</a> และคนในเซิร์ฟเวอร์ใจดีด้วยนะ! เรายังเปิด <a href='https://github.com/osuthailand'>src</a> ให้ได้ใช้ด้วย! จะได้รู้ว่าเราไม่ได้ทำอะไรแย่ๆ <b>ซึ่งตอนนี้เรามี คนทั้งหมด %s คนที่กำลังออนไลน์อยู่ และ คนที่สมัครเข้าเซิร์ฟแล้ว %s คน!</b>"
+msgid "Welcome to the first CoolerMaster osu Tournament server made in Thailand If you wanna join this server You Must Register This Tournament"
+msgstr "ยินดีต้อนรับเข้าสู่การเซิฟ CoolerMaster ครั้งแรกของประเทศไทย ถ้าคุณอยากจะเข้าเซิฟเวอร์นี้ คุณต้องสมัครการแข่งขันของ CoolerMaster ซะก่อนนะ"
 
 msgid "What are you waiting for? Join Ainu!! It's risk-free: you won't get your account banned on the official server if you play on Ainu!<br>You can also switch anytime between the official osu! server and Ainu!!"
 msgstr "แล้วจะรออะไรอยู่ล่ะ? มาเล่นกัน!! ไม่ต้องกลัวเรื่องการโดนแบน: เพราะคุณจะไม่โดนแบนในเซิร์ฟหลักหรอกถ้าคุณเล่นเซิร์ฟเวอร์เรา!<br>คุณยังสามารถสลับเซิร์ฟเวอร์ระหว่างเซิร์ฟเวอร์แท้และเซิร์ฟเวอร์ osu!thailand ได้ด้วยหละ!"

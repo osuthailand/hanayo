@@ -9,34 +9,236 @@ KyutGrill=homepage2.jpg
 {{ $   := . }}
 
 <div class="ui container">
-	<div class="ui center aligned segment">
-		<img src="/static/logos/ainu.png">
-	</div>
-	{{ $set := systemSettings "website_home_alert" }}
-	{{ with $set.website_home_alert.String }}
-		<div class="ui warning message">
+	{{ $set := systemSettings "website_home_alert"}}
+	{{with $set.website_home_alert.String }}
+		<div class="ui info message">
+			<br>
 			{{ . | html }}
+			<br>
 		</div>
 	{{ end }}
-	{{/* Not logged in block */}}
-	{{ if not .Context.User.ID }}
-		<div class="ui segment">
-			<h1 class="ui header">{{ .T "Welcome to Ainu!" }}</h1>
-			<p>
-				{{ .T "You look new here. Allow us to introduce you to what Ainu! is." }}
-			</p>
-			<p>
-				{{ .T "Ainu! is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand'>open source!</a> Just so you know, <b>we currently have %s users online and %s registered users!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
-			</p>
-			<h3 class="ui header center aligned">{{ .T "What are you waiting for? Join Ainu!! It's risk-free: you won't get your account banned on the official server if you play on Ainu!<br>You can also switch anytime between the official osu! server and Ainu!!" | html }}</h3>
+	<br>
+	<div id="content">
+		<div id="home">
+			<link onload="onLoad()" rel="stylesheet" href="/static/css/home.css">
+			<div class="container">
+				<div class="col-lg-12">
+					<div class="main-block">
+						<div class="mirai"></div>
+						<div class="content">
+							<div class="status">
+								{{ range $key, $value := (qb "SELECT COUNT(*) FROM users WHERE privileges >= 3") }}
+								<span>
+									<span style="color: #2094ca;" class="counter-text"> {{ $value }} </span> ผู้เล่นที่สมัคร
+								</span>
+								{{ end }}
+								<span style="margin-left: 16px;">
+									<span class="counter-text" style="color: #FF0000;"> ● </span> สถานะ
+								</span>
+							</div>
+							<br>
+							<span class="text-lg">
+								MTM!Tournament 
+							</span>
+							<br>
+							<span class="text-sm">
+							  ยินดีต้อนรับเข้าสู่ Tounament สำหรับ CoolerMaster ครั้งแรกในประเทศไทย ซึ่งเซิฟนี้ใช้ได้แค่สำหรับคนที่เข้าไปในงาน และ นักแข่งเท่านั้นนะครับ : ) เพราะชะนั้น สมัครกันเยอะๆหล่ะ!
+ 							</span>
+							<div class="buttons">
+								<a href="{{ if not .Context.User.ID }}/{{ else }}/u/{{ .Context.User.ID }}{{ end }}" class="home-btn btn-key">{{ if not .Context.User.ID }} ลงสมัครแข่งขัน {{else}} ดูโปรไฟล์ {{ end }} </a>
+								<a href="{{ if not .Context.User.ID }}/{{ else }}/settings{{ end }}" class="home-btn btn-how" style="margin-left: 6px;">{{ if not .Context.User.ID }} เข้าดิสคอร์ด {{ else }} ตั้งค่าโปรไฟล์ของคุณ {{ end }}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	{{ else }}
-		<div class="ui segment">
-			<h1 class="ui header">{{ .T "Howdy, %s!" .Context.User.Username }}</h1>
-			<p>
-				{{ $OnlineUsers := .Get "https://c.ainu.pw/api/v1/onlineUsers" }}
-				{{ .T "Welcome back to Ainu! We currently have <b>%s online users and %s total registered users.</b> Nice day to farm a few maps, isn't it?" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
-			</p>
+	</div>
+ <div class="ui container">
+  <div class="col-lg-12 d-flex justify-content-center">
+ <a href="https://discord.gg/WDrxDA" class="features">ทางการแข่งขันเราได้มี  Discord แล้ว เข้ามาเสนอไอเดีย ขอ Account ได้เลยนะ : ) <div class="discord-logo"></div></a>
+  </div>
+   </div>
+	{{/* Global Statistics */}}
+        <div class="ui stackable four grid">
+            <div class="eight wide column">
+                <div class="ui blue segment">
+                    <div class="ui grid">
+                        <div class="four wide column">
+                            <i class="user icon status-icon"></i>
+                        </div>
+                        <div class="twelve wide column">
+                        	{{ range $key, $value := (qb "SELECT COUNT(*) FROM users WHERE privileges >= 3") }}
+                        	{{ $tourStart := qb "SELECT value_int FROM system_settings WHERE name = 'istournamentstarts'" }}
+                            <p class="status-head">{{ if not ($tourStart.value_int.Bool) }} งานยังไม่เริ่ม {{ else }} {{ rediget "ripple:online_users" }} / {{ $value }} {{ end }} </p>
+                            {{ end }}
+                            <p class="status-footer">สถานะ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	    <div class="eight wide column">
+	       <div class="ui orange segment">
+	          <div class="ui grid">
+                     <div class="four wide column">
+                         <i class="user plus icon status-icon"></i>
+		     </div>
+                     <div class="twelve wide column">
+		         {{ range $key, $value := (qb "SELECT username FROM users WHERE privileges >=3 ORDER BY id DESC LIMIT 1") }}
+                         <p class="status-head">{{ $value }}</p>
+                         {{ end }}
+		         <p class="status-footer">คนสมัครล่าสุด</p>
+		     </div>
+	         </div>
+	     </div>
+	</div>
+            <div class="eight wide column">
+	       <div class="ui yellow segment">
+                 <div class="ui grid">
+                    <div class="four wide column">
+                       <i class="thumbs up icon status-icon"></i>
+                    </div>
+                    <div class="twelve wide column">
+                       {{ $tourStart := qb "SELECT value_int FROM system_settings WHERE name = 'istournamentstarts'" }}
+                       {{ $d := (qb "SELECT ROUND(pp) AS pp, users.username, users.id FROM scores INNER JOIN users ON scores.userid = users.id WHERE scores.play_mode = 0 AND completed = 3 AND users.privileges > 2 ORDER BY pp DESC LIMIT 1") }}
+                       <p class="status-head">{{ if not ($tourStart.value_int.Bool) }} งานยังไม่เริ่ม {{ else }} {{ $d.pp }}pp {{ end }}</p>
+                       <p class="status-head" style="font-size: 10px!important;">{{ if not ($tourStart.value_int.Bool) }} {{ else }} เล่น โดย <a href="/u/{{ $d.id }}">{{ $d.username }} {{ end }}</a></p>
+                       <p class="status-footer">PP ที่โหดที่สุด</p>
+                    </div>
+                 </div>
+              </div>
+            </div>
+	    <div class="eight wide column">
+               <div class="ui pink segment">
+                  <div class="ui grid">
+                     <div class="four wide column">
+                        <i class="angle double right icon status-icon"></i>
+                     </div>
+                     <div class="twelve wide column">
+                     	{{ $tourStart := qb "SELECT value_int FROM system_settings WHERE name = 'istournamentstarts'" }}
+                        {{ $value := (qb "SELECT ROUND(SUM(scores.pp)) AS pp FROM scores INNER JOIN users ON scores.userid = users.id WHERE scores.completed = 3 AND scores.play_mode = 0 AND users.privileges > 2") }}
+                        <p class="status-head">{{ if not ($tourStart.value_int.Bool) }} งานยังไม่เริ่ม {{ else }} {{ $value.pp }} {{ end }}</p>
+                        <p class="status-footer">PP ทั้งหมดในงาน</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+	</div> {{/* Global Stats end past this /div */}}
+<style type="text/css">
+.reviews {
+display: flex;
+flex-direction: column;
+margin-top: 20px;
+}
+.text-h2 {
+font-size: 32px;
+font-weight: 700;
+color: white;
+margin-bottom: 10px;
+}   
+.reviews-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 1em;
+}
+.review-single {
+    background-color: rgb(0,0,0,.47);
+    border-radius: 4px;
+    box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.11);
+    padding: 20px;
+    display: flex;
+}
+.reivew-avatar {
+    width: 44px;
+    height: 44px;
+    background-color: black;
+    background-size: cover;
+    border-radius: 200px;
+}
+.review-content {
+    margin-left: 13px;
+    display: flex;
+    flex-direction: column;
+}
+.review-text {
+    font-size: 14px;
+    line-height: 19px;
+    color: #DCDCDC;
+    max-width: 253px;
+}
+.text-h3 {
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+}  
+.features {
+    background-color: #7289da;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    background-image: url(https://osu.gatari.pw/static/images/backgrounds/home-btn.png);
+    color: white;
+    font-style: italic;
+    font-weight: 500;
+    padding: 4px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    width: 100%;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: bottom;
+    box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.11);
+    transition: 200ms background-color;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+.features .logo {
+    margin-left: 12px;
+}
+.features:hover {
+    color: white;
+    background-color: #1b1b1b;
+}
+
+.discord-logo {
+    margin: 4px;
+    cursor: pointer;
+    z-index: 2;
+    background-image: url(/static/logos/discord-logo.png);
+    width: 52px;
+    height: 52px;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.12));
+    background-repeat: no-repeat;   
+    background-size: contain;
+    position: relative;
+    will-change: transform;
+    transition: 0.12s transform;
+}
+
+</style>
+	<div class="ui container">
+	<div class="reviews">
+		<div class="col-lg-12">
+			<div class="reviews-row">
+				<div id="review" class="review-single">
+				</div>
+				<div id="review-row-2" class="review-single">
+				</div>
+				<div id="review-row-3" class="review-single">
+				</div>
+			</div>
 		</div>
-		{{ end }}
-		{{ end }}
+	</div>
+</div>
+<script type="text/javascript " src="/static/reviews.js?{{ unixNano }}"></script>
+</div>
+{{ end }}
+ 

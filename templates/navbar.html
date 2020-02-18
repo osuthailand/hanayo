@@ -3,11 +3,18 @@
 {{ $isAdmin := hasAdmin .Context.User.Privileges }}
 {{ $isClan := qb "SELECT user, clan FROM user_clans WHERE user = ?" .Context.User.ID }}
 {{ $ds      := band .ClientFlags 1 }}
-<div class="ui secondary fixed-height stackable white background main menu no margin bottom{{ if .DisableHH }} dropped{{ end }}" id="navbar">
+<div class="ui secondary fixed-height stackable white background main menu no margin bottom{{ if .DisableHH }} dropped{{ end }}" id="navbar" style="
+    z-index: 5;
+    position: relative;
+    background-size: 100%;
+    box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.11);
+    background-image: url(https://osu.gatari.pw/static/images/icons/button.svg);
+    background-color: #8f17a0 !important;">
 	<div class="ui container">
-		<div class="item">
-			<b><a href="/" title="{{ .T "Home page" }}"><img class="ripple logo" src="/static/logos/text-{{ if $ds }}white{{ else }}black{{ end }}.png" alt="Ainu"></a></b>
-		</div>
+		<a href="https://peppy.wtf" class="logo-all">
+			<div class="logo-fill"></div> 
+			<div class="logo"></div>
+		</a>
 		{{ if $isRAP }}
 			{{/*
 			Note:
@@ -16,49 +23,37 @@
 				the current RAP's sidebar.
 			*/}}
 		{{ else }}
+		{{ $tourStart := qb "SELECT value_int FROM system_settings WHERE name = 'istournamentstarts'" }}
+			{{ if not ($tourStart.value_int.Bool) }}
+			<div class="ui dropdown item">
+				<span>{{ .T "Leaderboard" }}</span>
+				<div class="menu">
+					{{ navbarItem .Path (.T "งานยังไม่เริ่ม") "" }}
+				</div>
+			</div>
+			{{ else }}
 			{{ navbarItem .Path (.T "Leaderboard") "/leaderboard" }}
-			<div class="ui dropdown item">
-				<span>{{ .T "Community" }}</span>
-                <div class="menu">
-                    {{ navbarItem .Path (.T "Multiplayer listing") "https://multi.ainu.pw" }}
-                    {{/* {{ navbarItem .Path (.T "Tournaments") "https://tourn.ainu.pw" }} */}}
-                    <div class="divider"></div>
-                    {{ navbarItem .Path (.T "Discord Server") .Conf.DiscordServer }}
-                </div>
-            </div>
-            <div class="ui dropdown item">
-				<span>{{ .T "Help" }}</span>
-				<div class="menu">
-					{{ navbarItem .Path (.T "About") "/about" }}
-					{{ navbarItem .Path (.T "Rules") "/doc/rules" }}
-					{{ navbarItem .Path (.T "Documentation") "/doc" }}
-					<a class="item" href="{{ .T "/static/serverswitcher_en.exe" }}">{{ .T "Server switcher" }}</a>
-				</div>
-			</div>
-			{{ if .Context.User.Username }}
-			<div class="ui dropdown item">
-				<span>{{ .T "Beatmaps" }}</span>
-				<div class="menu">
-					{{ navbarItem .Path (.T "Request beatmap ranking") "/beatmaps/rank_request" }}
-				</div>
-			</div>
-			<div class="ui dropdown item">
-				<span>{{ .T "Clans" }}</span>
-				<div class="menu">
-					{{ navbarItem .Path (.T "Clan Leaderboard") "/clans?mode=0" }}
-					{{ if ($isClan) }}
-					{{ navbarItem .Path (.T "Clan Settings") "/settings/clansettings" }}
-					{{ else }}
-					{{ end }}
-					{{ if ($isClan) }}
-					{{ else }}
-					<div class="divider"></div>
-					{{ navbarItem .Path (.T "Create Clan") "/clans/create" }}
-					{{ end }}
-				</div>
-			</div>
 			{{ end }}
-			{{ navbarItem .Path (.T "Donate" | printf "<i class=\"red heart icon\"></i>%s") "/donate" }}
+			<div class="ui dropdown item">
+				<span>{{ .T "แคลน" }}</span>
+				<div class="menu">
+					{{ navbarItem .Path (.T "กระดานแคลน") "/clans?mode=0" }}
+					{{ if ($isClan) }}
+					{{ navbarItem .Path (.T "ตั้งค่าแคลน") "/settings/clansettings" }}
+					{{ else }}
+					{{ end }}
+                    {{ if .Context.User.Username }}
+					<div class="divider"></div>
+					{{ navbarItem .Path (.T "สร้างแคลน [ใครมีแล้วไม่ต้องสร้างใหม่]") "/clans/create" }}
+					{{ end }}
+				</div>
+			</div>
+			<div class="ui dropdown item">
+				<span>โดเนทผมหน่อยสิ : )</span>
+				<div class="menu">
+					{{ navbarItem .Path (.T "ทัก Varkaria#7055 ใน Discord") "" }}
+				</div>
+			</div>
 			{{ if $isAdmin }}{{ navbarItem .Path (.T "AAP" | printf "<b>%s</b>") "https://old.ainu.pw/index.php?p=100" }}{{ end }}
 			{{ end }}
 		<div class="firetrucking-right-menu">
@@ -82,8 +77,13 @@
 					</div>
 				</div>
 			{{ else }}
-				{{ navbarItem .Path (.T "Log in") "/login" }}
-				{{ navbarItem .Path (.T "Register") "/register" }}
+			<div class="ui dropdown item">
+					<img id="avatar" class="nouserlogo" src="https://peppy.wtf/static/logos/avatar-guest.png">
+					<div class="menu">
+				       {{ navbarItem .Path (.T "Log in") "/login" }}
+				       {{ navbarItem .Path (.T "Register") "/register" }}
+				</div>
+			</div>
 			{{ end }}
 		</div>
 	</div>
