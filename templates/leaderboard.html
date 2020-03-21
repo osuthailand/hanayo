@@ -5,16 +5,16 @@ KyutGrill=leaderboard2.jpg
 */}}
 {{ define "tpl" }}
 <div class="ui container">
-	{{ $user := . }}
-	{{ $favModeRaw := .Get "users/self/favourite_mode" }}
-	{{ $favMode := _or (atoi (.Gin.Query "mode")) $favModeRaw.favourite_mode (float 0) }}
-	<script>
-		var favouriteMode = {{ $favMode }};
-		var rx = {{ .Gin.Query "rx" | atoi | (float 0) }};
-		var page = {{ .Gin.Query "p" | atoint | atLeastOne }};
-		var country = {{ .Gin.Query "country" }}.toLowerCase();
-		if (country.length != 2)
-			country = "";
+    {{ $user := . }}
+    {{ $favModeRaw := .Get "users/self/favourite_mode" }}
+    {{ $favMode := _or (atoi (.Gin.Query "mode")) $favModeRaw.favourite_mode (float 0) }}
+    <script>
+        var favouriteMode = {{ $favMode }};
+        var rx = 0;
+        var page = {{ .Gin.Query "p" | atoint | atLeastOne }};
+        var country = {{ .Gin.Query "country" }}.toLowerCase();
+        if (country.length != 2)
+            country = "";
 	</script>
 	<div class="ui two item menu" id="rx-menu">
 			<a class="0 item" data-rx="0" href="/leaderboard?rx=0">Regular</a>
