@@ -144,6 +144,7 @@
 		<script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.2"></script>
 		<script src="/static/dist.min.js?{{ unixNano }}"></script>
 		<script src="/static/timeago-locale/jquery.timeago.{{ with $lang }}{{ . }}{{end}}.js"></script>
+		<script src="/static/live2dw/lib/L2Dwidget.min.js?{{ unixNano }}"></script><script>L2Dwidget.init({"pluginRootPath":"static/live2dw/","pluginJsPath":"/static/lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/static/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 		{{ if .Scripts }}
 			{{ range .Scripts }}
 				<script src="{{ . }}?{{ unixNano }}"></script>
