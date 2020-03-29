@@ -9,7 +9,7 @@
 		{{ with $s.website_maintenance.Int }}
 		<link rel="stylesheet" type="text/css" href="/static/maintenance.css?{{ unixNano }}">
 		<script src="https://kit.fontawesome.com/fdf0b80f23.js" crossorigin="anonymous"></script>
-		<title>Maintenance - Ainu</title>
+		<title>Maintenance - The Realm</title>
 	</head>
 	{{ else }}
 		<noscript>
@@ -30,7 +30,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>{{ if .TitleBar }}{{ .T .TitleBar }}{{ end }} {{ .T "- Ainu" }}</title>
+		<title>{{ if .TitleBar }}{{ .T .TitleBar }}{{ end }} {{ .T "- Realm" }}</title>
 
 		<link rel="stylesheet" type="text/css" href="/static/{{ if $ds }}dark/{{ end }}semantic.min.css?{{ unixNano }}">
 		<link rel="stylesheet" type="text/css" href="/static/ripple.css?{{ unixNano }}">
@@ -69,18 +69,11 @@
 		*/}}
 		<div class="ui full height main wrapper"
 			{{ if and .DisableHH .KyutGrill }}
-				style="background-image: url('{{ if .KyutGrillAbsolute }}{{ .KyutGrill }}{{ else }}/static/headers/{{ .KyutGrill }}{{ end }}');"
 			{{ else if .SolidColour }}
-				style="background-color: {{ .SolidColour }}"
 			{{ end }}>
 			{{ template "navbar" . }}
 			{{ if not .DisableHH }}
-				<div class="huge heading {{ if .HeadingOnRight }}right{{ end }} dropped"
-					style="background-image: url('{{ if .KyutGrillAbsolute }}{{ .KyutGrill }}{{ else }}/static/headers/{{ or .KyutGrill "default.jpg" }}{{ end }}');">
-					<div class="ui container">
-						<h1>{{ if .HeadingTitle }}{{ .T .HeadingTitle | html }}{{ else }}{{ .T .TitleBar }}{{ end }}</h1>
-					</div>
-				</div>
+
 			{{ end }}
 
 			<div class="h-container">
@@ -88,7 +81,7 @@
 				<noscript>Research has proven this website works 10000% better if you have JavaScript enabled.</noscript>
 				{{ if and .Context.User.Username (not (has .Context.User.Privileges 1)) }}
 					<div class="ui warning message">
-						{{ $.T "Your account is currently in restricted mode. You will not be able to do certain actions, and your profile can only be seen by you and by Ainu!'s staff. If you believe we have mistaken putting you in restricted mode, or a month has passed since you first saw this, then you can send an appeal at <a href='https://discord.gg/CEjWW4K'>our Discord</a>." | html }}
+						{{ $.T "Your account is currently in restricted mode. You will not be able to do certain actions, and your profile can only be seen by you and by The Realm's staff. If you believe we have mistaken putting you in restricted mode, or a month has passed since you first saw this, then you can send an appeal at <a href='https://discord.gg/ts56dAt'>our Discord</a>." | html }}
 					</div>
 				{{ end }}
 				{{ if .Messages }}
@@ -108,7 +101,7 @@
 				{{ end }}
 				{{ with $settings.game_maintenance.Int }}
 					<div class="ui warning message">
-						{{ $.T "Ainu!'s score submission is currently in maintenance mode. You will not be allowed to submit scores for the time being." }}
+						{{ $.T "The Realm's score submission is currently in maintenance mode. You will not be allowed to submit scores for the time being." }}
 					</div>
 				{{ end }}
 				</div>
@@ -120,7 +113,7 @@
 			
 			<font style='color:black'>
 			{{ if $ds }}<font style='color:white' >{{ end }}
-			{{ .T "&copy; 2018-%d Ripple, osu!Ainu, Made with love by Aoba ❤ using Hanayo %s" (curryear) (version) | html }}  |
+			{{ .T "&copy; 2019-%d Realm, The Realm, Made with love by Aoba & Adobe ❤ using Hanayo" (curryear) | html }}  |
 			<div class="ui scrolling dropdown" style="margin-left: 5px;" id="language-selector">
 				{{ $lang := .Context.Language }}
 				{{ with $lang }}

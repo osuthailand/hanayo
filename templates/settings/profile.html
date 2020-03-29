@@ -6,6 +6,7 @@ Include=menu.html
 MinPrivileges=2
 */}}
 {{ define "tpl" }}
+{{ $global := . }}
 <div class="ui container">
 	<div class="ui stackable grid">
 		{{ template "settingsSidebar" . }}
@@ -15,7 +16,7 @@ MinPrivileges=2
 					{{ $d := .Get "users/self/settings" }}
 					<h3 class="ui header">{{ .T "General" }}</h3>
 					<div class="field">
-						<label><a href="{{ .Conf.DiscordServer }}">{{ .T "Username" }}</a></label>
+						<label><a href="https://support.ripple.moe">{{ .T "Username" }}</a></label>
 						<input type="text" value="{{ .Context.User.Username }}" disabled>
 					</div>
 					<div class="field">
@@ -72,11 +73,16 @@ MinPrivileges=2
 							</div>
 						{{ end }}
 					</div>
+				{{ $donor := has .Context.User.Privileges 7 }}
+				{{ if $donor }}
 					<h3 class="ui header">{{ .T "Preferences" }}</h3>
 					{{ $ds := band .ClientFlags 1 }}
 					<div class="ui checkbox">
 						<input type="checkbox" {{ if $ds }}checked{{ end }} id="dark-site">
-						<label>{{ .T "Dark site" }}</label>
+						<label>{{ .T "Alternate site" }}</label>
+                               	{{ else }}
+					<h3 class="ui header">{{ .T "Purchase supporter to unlock more site alternations!" }}</h3>
+				{{ end }}
 					</div>
 					<div class="ui divider"></div>
 					<div style="text-align: right">

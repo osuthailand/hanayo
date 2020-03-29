@@ -121,16 +121,16 @@ func main() {
 	var configDefaults = map[*string]string{
 		&config.ListenTo:         ":6969",
 		&config.CookieSecret:     rs.String(46),
-		&config.AvatarURL:        "https://a.ainu.pw",
-		&config.BaseURL:          "https://ainu.pw",
-		&config.BanchoAPI:        "https://c.ainu.pw",
+		&config.AvatarURL:        "https://a.theosurealm.tk",
+		&config.BaseURL:          "https://theosurealm.tk",
+		&config.BanchoAPI:        "https://c.theosurealm.tk",
 		&config.CheesegullAPI:    "https://storage.ainu.pw/api",
 		&config.API:              "http://localhost:40001/api/v1/",
 		&config.APISecret:        "Potato",
 		&config.IP_API:           "https://ip.zxq.co",
-		&config.DiscordServer:    "https://discord.gg/Qp3WQU8",
+		&config.DiscordServer:    "https://https://discord.gg/ts56dAt",
 		&config.MainRippleFolder: "/root/ripple/",
-		&config.MailgunFrom:      `"Ainu" <noreply@ripple.moe>`,
+		&config.MailgunFrom:      `"Realm" <theosurealm@gmail.com>`,
 	}
 	for key, value := range configDefaults {
 		if *key == "" {

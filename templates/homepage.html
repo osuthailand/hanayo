@@ -9,6 +9,7 @@ KyutGrill=homepage2.jpg
 {{ $   := . }}
 
 <div class="ui container">
+	<div class="ui segments">
 	<div class="ui center aligned segment">
 		<img src="/static/logos/ainu.png">
 	</div>
@@ -21,22 +22,88 @@ KyutGrill=homepage2.jpg
 	{{/* Not logged in block */}}
 	{{ if not .Context.User.ID }}
 		<div class="ui segment">
-			<h1 class="ui header">{{ .T "Welcome to Ainu!" }}</h1>
-			<p>
-				{{ .T "You look new here. Allow us to introduce you to what Ainu! is." }}
+			<h1 class="ui centered header">{{ .T "Welcome to The Realm" }}</h1>
+			<p style="text-align: center;">
+				{{ .T "You look new here. Allow us to introduce you to what The Realm is." }}
 			</p>
-			<p>
-				{{ .T "Ainu! is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand'>open source!</a> Just so you know, <b>we currently have %s users online and %s registered users!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
+			<p style="text-align: center;">
+				{{ .T "The Realm is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand'>open source!</a> Just so you know, <b>we are a safe and growing community</b>"  | html }}
 			</p>
-			<h3 class="ui header center aligned">{{ .T "What are you waiting for? Join Ainu!! It's risk-free: you won't get your account banned on the official server if you play on Ainu!<br>You can also switch anytime between the official osu! server and Ainu!!" | html }}</h3>
+			<h3 class="ui header center aligned">{{ .T "What are you waiting for? The Realm!! It's risk-free: you won't get your account banned on the official server if you play on The Realm!<br>You can also switch anytime between the official osu! server and The Realm!!" | html }}</h3>
 		</div>
 	{{ else }}
 		<div class="ui segment">
-			<h1 class="ui header">{{ .T "Howdy, %s!" .Context.User.Username }}</h1>
-			<p>
-				{{ $OnlineUsers := .Get "https://c.ainu.pw/api/v1/onlineUsers" }}
-				{{ .T "Welcome back to Ainu! We currently have <b>%s online users and %s total registered users.</b> Nice day to farm a few maps, isn't it?" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
+			<h1 class="ui center aligned header">{{ .T "Howdy, %s!" .Context.User.Username }}</h1>
+			<p style="text-align: center;">
+				{{ .T "Welcome back to The Realm, Nice day to Achieve that sweet PP, isn't it?" | html }}
 			</p>
+			<div class="ui center aligned segment">
+			<h1 class="ui header">{{ .T "Featured Video" }}</h1>
+			<p>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+			<script src="../static/js/featured_video.js"></script>
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/qEaFI_Qxi7M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>			
+		{{/* Global Statistics */}}
+		<div class="ui container">
+				<div class="ui three grid">
+					<div class="five wide column">
+						<div class="ui clear segment">
+							<div class="ui grid">
+								<div class="four wide column">
+									<i class="angle double up icon status-icon"></i>
+								</div>
+								<div class="twelve wide column">
+					{{ $d := (qb "SELECT ROUND(pp) AS pp, users.username, users.id FROM scores INNER JOIN users ON scores.userid = users.id WHERE scores.play_mode = 0 AND completed = 3 AND users.privileges > 2 ORDER BY pp DESC LIMIT 1") }}
+					<p class="status-head">Top Vanilla Score</p>				
+					<p class="status-head">{{ $d.pp }}pp</p>
+						<p class="status-head">Achieved by <a href="/u/{{ $d.id }}">{{ $d.username }}</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="five wide column">
+						<div class="ui clear segment">
+							<div class="ui grid">
+								<div class="four wide column">
+									<i class="user icon status-icon"></i>
+								</div>
+								<div class="twelve wide column">
+					{{ $totalUsers := (qb "SELECT COUNT(*) AS users FROM users") }}
+					<p class="status-head"><b>{{ $totalUsers.users }}</b> Registered users</p>
+					{{ .T "<b>%s </b> Online Users" (rediget "ripple:online_users") | html }}
+					<br>
+					<br>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				<div class="six wide column">
+				   <div class="ui clear segment">
+					  <div class="ui grid">
+							 <div class="four wide column">
+								 <i class="angle double up icon status-icon"></i>
+					 </div>
+							 <div class="twelve wide column">
+					{{ $d := (qb "SELECT ROUND(pp) AS pp, users.username, users.id FROM scores_relax INNER JOIN users ON scores_relax.userid = users.id WHERE scores_relax.play_mode = 0 AND completed = 3 AND users.privileges > 2 ORDER BY pp DESC LIMIT 1") }}
+					<p class="status-head">Top Relax Score</p>			
+					<p class="status-head">{{ $d.pp }}pp</p>
+					  <p class="status-head">Achieved by <a href="/rx/u/{{ $d.id }}">{{ $d.username }}</a></p>
+					 </div>
+					 </div>
+				 </div>
+			</div>
+		 
+			</div> {{/* Global Stats end past this /div */}}
 		</div>
+
 		{{ end }}
 		{{ end }}
+
+
+
+
+			{{ $OnlineUsers := .Get "https://c.ainu.pw/api/v1/onlineUsers" }}
+			{{ .T "Welcome back to Ainu! We currently have <b>%s online users and %s total registered users.</b> Nice day to farm a few maps, isn't it?" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
+		</p>
