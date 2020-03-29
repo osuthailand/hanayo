@@ -9,12 +9,14 @@ NoCompile=true
 		{{ navbarItem .Path (.T "Userpage") "/settings/userpage" }}
 
 		{{ navbarItem .Path (.T "Avatar") "/settings/avatar" }}
-
+{{ if has .Context.User.Privileges 4 }}
 		{{ navbarItem .Path (.T "Profile Background") "/settings/profbackground" }}
-
+{{ end }}
 		{{ navbarItem .Path (.T "Password") "/settings/password" }}
-
+{{ $isClanO := qb "SELECT user, clan FROM user_clans WHERE user = ? AND privileges = 8" .Context.User.ID }}
+{{ if ($isClanO) }}
 		{{ navbarItem .Path (.T "Clan Settings") "/settings/clansettings" }}
+{{ end }}
 	</div>
 </div>
 {{ end }}

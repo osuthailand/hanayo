@@ -82,7 +82,6 @@
 				<div class="ui dropdown item">
 					<img id="avatar" class="ui avatar image" src="{{ config "AvatarURL" }}/{{ .Context.User.ID }} ">
 					<div class="menu">
-					<h2><img id="avatar" class="ui avatar image" src="{{ config "AvatarURL" }}/{{ .Context.User.ID }}"><span>{{ .Context.User.Username }}</span></h2>
 						{{ navbarItem .Path (.T "View profile") (printf "/u/%d" .Context.User.ID) }}
 						{{ navbarItem .Path (.T "Friends List") "/friends" }}
 						{{ navbarItem .Path (.T "Change settings") "/settings" }}
