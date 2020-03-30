@@ -68,18 +68,18 @@ KyutGrill=homepage2.jpg
 								<div class="four wide column">
 									<i class="user icon status-icon"></i>
 								</div>
-								<div class="twelve wide column">
-					{{ $totalUsers := (qb "SELECT COUNT(*) AS users FROM users") }}
-					<p class="status-head"><b>{{ $totalUsers.users }}</b> Registered users</p>
-					{{ .T "<b>%s </b> Online Users" (rediget "ripple:online_users") | html }}
-					<br>
-					<br>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				<div class="six wide column">
+					<div class="twelve wide column">
+                 				   {{ $totalUsers := (qb "SELECT COUNT(id) AS users FROM users") }}
+                   				 <p class="status-head"><b>{{ $totalUsers.users }}</b> Registered users</p>
+                  				  <p>{{ .T "<b>%s </b> Online Users" (rediget "ripple:online_users") | html }}
+                   				  </p>
+                   				 {{ $lastUser := (qb "SELECT username FROM users ORDER BY id DESC LIMIT 1") }}
+                   				 <p class="status-head">Latest user: <b>{{ $lastUser.username }}</b></p>
+                           				     </div>
+                          				  </div>
+                      				  </div>
+                  				  </div>	
+			<div class="six wide column">
 				   <div class="ui clear segment">
 					  <div class="ui grid">
 							 <div class="four wide column">
