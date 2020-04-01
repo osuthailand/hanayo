@@ -3328,6 +3328,8 @@ var TopPasswords = []string{
 	"macintos",
 	"macaroni",
 	"lunchbox",
+	"cum",
+	"cumcum",
 	"kcchiefs",
 	"istheman",
 	"implants",
