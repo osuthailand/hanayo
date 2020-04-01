@@ -9,6 +9,7 @@ package toppasswords
 var TopPasswords = []string{
 	"password",
 	"12345678",
+	"mydadleft",
 	"123456789",
 	"baseball",
 	"football",
