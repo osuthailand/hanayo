@@ -10,6 +10,7 @@ var TopPasswords = []string{
 	"password",
 	"12345678",
 	"mydadleft",
+	"mydadleftagain",
 	"123456789",
 	"baseball",
 	"football",
