@@ -299,7 +299,7 @@ msgid "Documentation"
 msgstr "F.A.Q etc."
 
 msgid "Server switcher"
-msgstr ""
+msgstr "Server-Wechsler"
 
 msgid "Status"
 msgstr "Status"
@@ -381,7 +381,7 @@ msgid ""
 "from your own computer."
 msgstr ""
 "Falls du nicht %s bist, sondern %s's Computer nutzt, dann registriere dich "
-"bitte von deinem eigenen Computer bei Ainu!."
+"bitte von deinem eigenen Computer bei Ainu!"
 
 msgid ""
 "If you live with %s and you don't have your own computer from which to sign "
@@ -456,7 +456,7 @@ msgstr "Erfolgreich abgemeldet."
 msgid ""
 "Forgot your password? Worry not! Here you can reset it. Just tell us your "
 "username or email address, and we'll take care of it. You will receive an "
-"email at the email address you used to sign up on Ainu!. To continue the "
+"email at the email address you used to sign up on Ainu! To continue the "
 "password reset procedure, click the link on that email."
 msgstr ""
 "Du hast dein Passwort vergessen? Keine Sorge! Hier kannst du es "
@@ -471,7 +471,7 @@ msgstr "Sieht so aus als wärst du hier gefangen ( ͡° ͜ʖ ͡°)."
 
 msgid ""
 "Done! You should shortly receive an email from us at the email you used to "
-"sign up on Ainu!."
+"sign up on Ainu!"
 msgstr ""
 "Alles erledigt! Bald sollte eine E-Mail bei der von dir angegebenen E-Mail "
 "Adresse ankommen."
@@ -482,7 +482,7 @@ msgstr "Anweisungen zur Ainu!-Passwortzurücksetzung"
 msgid ""
 "Hey %s! Someone, which we really hope was you, requested a password reset "
 "for your account. In case it was you, please <a href='%s'>click here</a> to "
-"reset your password on Ainu!. Otherwise, silently ignore this email."
+"reset your password on Ainu! Otherwise, silently ignore this email."
 msgstr ""
 "Hallo %s! Jemand, und wir hoffen wirklich, dass du das warst, hat eine "
 "Passwortzurücksetzung für deinen Account angefordert. Falls du das gewesen "
@@ -506,11 +506,23 @@ msgstr "Startseite"
 msgid "Leaderboard"
 msgstr "Rangliste"
 
+msgid "Community"
+msgstr "Community"
+
+msgid "Top Plays"
+msgstr "Beste Plays"
+
+msgid "Discord Server"
+msgstr "Discord Server"
+
 msgid "Help"
 msgstr "Hilfe"
 
 msgid "About"
 msgstr "Über"
+
+msgid "Server switcher"
+msgstr "Server-Wechsler"
 
 msgid "Chat (Discord)"
 msgstr "Chat (Discord)"
@@ -521,17 +533,29 @@ msgstr "Support kontaktieren"
 msgid "Beatmaps"
 msgstr "Beatmaps"
 
+msgid "Clans"
+msgstr "Clans"
+
+msgid "Clan Leaderboard"
+msgstr "Clan Rangliste"
+
+msgid "Clan Settings"
+msgstr "Clan Einstellungen"
+
 msgid "Donate"
 msgstr "Spenden"
 
-msgid "RAP"
-msgstr "RAP"
+msgid "AAP"
+msgstr "AAP"
 
 msgid "Profile"
 msgstr "Profil"
 
 msgid "Friends"
 msgstr "Freunde"
+
+msgid "Your Followers"
+msgstr "Deine Follower"
 
 msgid "Settings"
 msgstr "Einstellungen"
@@ -546,8 +570,8 @@ msgstr "Suchst du jemanden?"
 msgid "Home Page"
 msgstr "Homepage"
 
-msgid "Welcome to Ainu!."
-msgstr "Willkommen bei Ainu!."
+msgid "Welcome to Ainu!"
+msgstr "Willkommen bei Ainu!"
 
 msgid "Ainu! is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand'>open source!</a> Just so you know, <b>we currently have %s users online and %s registered users!</b>"
 msgstr ""
@@ -567,19 +591,10 @@ msgstr ""
 "und Ainu! wechseln!"
 
 msgid "Howdy, %s!"
-msgstr "Howdy, %s!"
+msgstr "Tagchen, %s!"
 
-msgid ""
-"Welcome back to Ainu!. We currently have <b>%s online users and %s total "
-"registered users.</b> Nice day to farm a few maps, isn't it?"
-msgstr ""
-"Willkommen zurück bei Ainu!. Momentan sind <b>%s Nutzer online und wir "
-"haben %s insgesamt registrierte Nutzer.</b> Schöner Tag um ein paar Maps zu "
-"farmen, oder?"
-
-msgid "Latest news from our <a href='https://blog.ripple.moe'>blog</a>"
-msgstr ""
-"Neuste Informationen von unserem <a href='https://blog.ripple.moe'>Blog</a>"
+msgid "Welcome back to Ainu! We currently have <b>%s online users and %s total registered users.</b> Nice day to farm a few maps, isn't it?"
+msgstr "Willkommen zurück bei Ainu! Momentan sind <b>%s Nutzer online und wir haben %s insgesamt registrierte Nutzer.</b> Schöner Tag um ein paar Maps zu farmen, oder?"
 
 # base.html
 msgid ""
@@ -640,49 +655,49 @@ msgstr "Sprache"
 
 # beatmap.html
 msgid "Artist"
-msgstr ""
+msgstr "Künstler"
 
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 msgid "Creator"
-msgstr ""
+msgstr "Ersteller"
 
 msgid "Source"
-msgstr ""
+msgstr "Quelle"
 
 msgid "Circle Size"
-msgstr ""
+msgstr "Circle Größe"
 
 msgid "HP Drain"
-msgstr ""
+msgstr "HP Drain"
 
 msgid "Overall Difficulty"
-msgstr ""
+msgstr "Gesamtschwierigkeit"
 
 msgid "Passes/Plays"
-msgstr ""
+msgstr "Gepassed/Spiele"
 
 msgid "Approach Rate"
-msgstr ""
+msgstr "Approach Rate"
 
 msgid "Star Difficulty"
-msgstr ""
+msgstr "Schwierigkeit in Sternen"
 
 msgid "Length"
-msgstr ""
+msgstr "Länge"
 
 msgid "BPM"
-msgstr ""
+msgstr "BPM"
 
 msgid "osu!direct"
-msgstr ""
+msgstr "osu!direct"
 
 msgid "download"
-msgstr ""
+msgstr "herunterladen"
 
 msgid "download (no video)"
-msgstr ""
+msgstr "herunterladen (ohne Video)"
 
 # 2fa_gateway.html
 msgid "Two Factor Authentication"
@@ -764,7 +779,7 @@ msgid "Global leaderboards."
 msgstr "Globale Bestenlisten."
 
 msgid "and PP for all game modes"
-msgstr ""
+msgstr "und pp für alle Spielmodi"
 
 msgid "Ranking queue for unranked beatmaps."
 msgstr "Ranking Liste für unranked Beatmaps."
@@ -1025,7 +1040,7 @@ msgid "Level %s"
 msgstr "Level %s"
 
 msgid "Achievements"
-msgstr ""
+msgstr "Errungenschaften"
 
 # support.html
 msgid "Support Ainu!"
@@ -1499,10 +1514,10 @@ msgid "Revoke"
 msgstr "Widerrufen"
 
 msgid "Dark site"
-msgstr ""
+msgstr "Dunkles Design"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Präferenzen"
 
 # Go source
 msgid "TOTP-based 2FA has been enabled on your account."
@@ -1643,10 +1658,10 @@ msgstr ""
 "Sieht so aus als bist du das erste Mal hier. Lass uns dir ein wenig "
 "erklären, was genau Ainu! ist."
 
-# PAY ATTENTION! This is Log in *with* Ainu!, not *on* Ainu!. This is for
+# PAY ATTENTION! This is Log in *with* Ainu!, not *on* Ainu! This is for
 # oauth.
 msgid "Log in with Ainu!"
-msgstr "Einloggen durch Ainu!."
+msgstr "Einloggen durch Ainu!"
 
 msgid "This application will be able to:"
 msgstr "Diese App wird zu folgendem fähig sein:"
@@ -1686,10 +1701,10 @@ msgstr ""
 "Anwendungen, denen du wirklich vertraust!"
 
 msgid "Access to Bancho"
-msgstr ""
+msgstr "Zugang zu Bancho"
 
 msgid "This application will be able to make you appear online ingame and use the chat."
-msgstr ""
+msgstr "Mit dieser Anwendung kannst du online im Spiel den Chat nutzen."
 
 msgid "Approve"
 msgstr "Akzeptieren"
@@ -1761,7 +1776,7 @@ msgstr ""
 msgid "Special thanks"
 msgstr "Besonderen Dank an:"
 
-msgid "Here's a list of people who helped with Ainu!."
+msgid "Here's a list of people who helped with Ainu!"
 msgstr "Die Leute die in dieser Liste stehen und Ainu! geholfen haben."
 
 msgid ""
@@ -1784,6 +1799,8 @@ msgid ""
 "<b>Sunpy</b>, for <a href='https://github.com/osufx/catch-the-pp'>catch-the-"
 "pp</a>, used as catch the beat pp calculator."
 msgstr ""
+"<b>Sunpy</b>, für <a href='https://github.com/osufx/catch-the-pp'>catch-the-"
+"pp</a>, das abgewandelt als catch the beat PP-Rechner benutzt wird."
 
 msgid ""
 "<b>jrosdahl</b>, for <a "
@@ -1827,11 +1844,11 @@ msgid "Support us with a donation!"
 msgstr "Unterstütze uns mit einer Spende!"
 
 msgid "(You get other cool perks too)"
-msgstr "(Bekommst sogar noch feine Sachen dazu)"
+msgstr "(Bekommst sogar noch andere tolle Sachen dazu)"
 
 msgid ""
 "The Ainu! API is the system through which developers can create "
-"applications to interact with Ainu!. <b>If you're asked to fill out an API "
+"applications to interact with Ainu! <b>If you're asked to fill out an API "
 "token from this page, be wary and only actually create the token if you "
 "really trust the owner of the application.</b>"
 msgstr ""
@@ -1903,36 +1920,35 @@ msgid ""
 "Last but not least, <b>the support email is not meant for filing bug "
 "reports</b>. If you need to report a bug, then please just ask one of our "
 "developers on Discord. If it's a security bug, for instance XSS or SQL "
-"injection, then please contact <a href='mailto:howl@ripple.moe'>Howl</a> or <"
-"a href='mailto:nyo@ripple.moe'>Nyo</a>."
+"injection, then please contact <"
+"a href='mailto:support@ainu.pw'>Aoba</a>."
 msgstr ""
 "Zu guter letzt, <b>die Support-Mail ist nicht gedacht um Bug-Meldungen "
 "einzureichen</b>. Falls du einen Bug melden möchtest, wende dich an einen "
 "unserer Entwickler in Discord. Falls es ein Sicherheitsbug ist, zum Beispiel "
 "eine XSS oder SQL-Injektion, dann kontaktiere <a "
-"href='mailto:howl@ripple.moe'>Howl</a> oder <a "
-"href='mailto:nyo@ripple.moe'>Nyo</a>."
+"href='mailto:support@ainu.pw'>Aoba</a>."
 
 msgid "I have read and understood everything on this page."
 msgstr "Ich habe alles auf dieser Seite gelesen und verstanden."
 
 msgid "The 'Ranking Criteria' are as follows:"
-msgstr ""
+msgstr "Die 'Ranking Kriterien' lauten wie folgt:"
 
 msgid "Follow the <a href='https://osu.ppy.sh/help/wiki/Ranking_Criteria/'>Bancho Ranking Criteria</a> to some extend"
-msgstr ""
+msgstr "Befolge den <a href='https://osu.ppy.sh/help/wiki/Ranking_Criteria/'> Bancho Ranking Kriterien</a> bis zu einem gewissen Punkt"
 
 msgid "No clear abuse of any systems (pp/stars)"
-msgstr ""
+msgstr "Kein eindeutiger Missbrauch von Systemen (pp/Sterne)"
 
 msgid "No speedup or re-upload of existing maps"
-msgstr ""
+msgstr "Keine Beschleunigung oder erneutes Hochladen von bereits existierenden Maps"
 
 msgid "No Jump/Stream Training Compilations"
-msgstr ""
+msgstr "Keine Jump- oder Streamtraining Zusammenstellungen"
 
 msgid "At least 66% Completion for 7+ Minute songs, anything else completely mapped"
-msgstr ""
+msgstr "Mindestens 66% Fertigstellung bei Liedern von 7 oder mehr Minuten Länge, alles andere vollständig gemapped"
 
 msgid "Popularity does not mean rankable"
-msgstr ""
+msgstr "Bekanntheit heißt nicht, dass es geranked wird"
