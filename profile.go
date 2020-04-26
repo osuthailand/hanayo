@@ -12,6 +12,8 @@ import (
 type profileData struct {
 	baseTemplateData
 	UserID int
+	Allowedtoreport bool
+
 }
 
 func userProfile(c *gin.Context) {
@@ -19,6 +21,7 @@ func userProfile(c *gin.Context) {
 		userID     int
 		username   string
 		privileges uint64
+		allowedtoreport bool
 	)
 
 	ctx := getContext(c)
@@ -42,6 +45,11 @@ func userProfile(c *gin.Context) {
 			c.Error(err)
 		}
 	}
+	// Checks if the user is allowed to report people
+	err := db.QueryRow("SELECT allowedtoreport FROM users WHERE id = ? AND "+ctx.OnlyUserPublic()+" LIMIT 1", ctx.User.ID).Scan(&allowedtoreport)
+	if err != nil && err != sql.ErrNoRows {
+		c.Error(err)
+	}
 	if db.QueryRow("SELECT 1 FROM users_stats WHERE id = ? AND prefer_relax = 1", userID).
 		Scan(new(int)) != sql.ErrNoRows {
 		getSession(c).Save()
@@ -50,6 +58,7 @@ func userProfile(c *gin.Context) {
 	}
 	data := new(profileData)
 	data.UserID = userID
+	data.Allowedtoreport = allowedtoreport
 
 	defer resp(c, 200, "profile.html", data)
 
@@ -84,6 +93,7 @@ func relaxProfile(c *gin.Context) {
 		userID     int
 		username   string
 		privileges uint64
+		allowedtoreport bool
 	)
 
 	ctx := getContext(c)
@@ -107,9 +117,15 @@ func relaxProfile(c *gin.Context) {
 			c.Error(err)
 		}
 	}
+	// Checks if the user is allowed to report people
+	err := db.QueryRow("SELECT allowedtoreport FROM users WHERE id = ? AND "+ctx.OnlyUserPublic()+" LIMIT 1", ctx.User.ID).Scan(&allowedtoreport)
+	if err != nil && err != sql.ErrNoRows {
+		c.Error(err)
+	}
 
 	data := new(profileData)
 	data.UserID = userID
+	data.Allowedtoreport = allowedtoreport
 
 	defer resp(c, 200, "profile_rx.html", data)
 

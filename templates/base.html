@@ -90,6 +90,11 @@
 							</div>
 						{{ end }}
 				{{ end }}
+				{{ if eq .Context.User.ID 2193 }}
+				<div class="ui error message">
+					<h1>GIVE LIVEPLAY TO SIMON OR GAY. you got 3 days to do it owo</h1>
+				</div>
+				{{ end }}
 				{{ $settings := systemSettings "website_maintenance" "game_maintenance" "website_global_alert" }}
 				{{ with $settings.website_global_alert.String }}
 					<div class="ui warning message">
@@ -103,8 +108,7 @@
 				{{ end }}
 				</div>
 				{{ template "tpl" . }}
-			</div>
-			<p>
+				<p>
 			<br />
 			<center>
 			    <div class="footer twemoji">
@@ -132,6 +136,8 @@
 			            </font>
 			    </div>
 			</center>
+				</div>
+			</div>
 		<script>
 			var hanayoConf = {
 				avatars:   {{ .Conf.AvatarURL }},
@@ -153,7 +159,7 @@
 				<script src="{{ . }}?{{ unixNano }}"></script>
 			{{ end }}
 		{{ end }}
-		
+
 		    <!-- JavaScript
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/static/jquery-1.10.2.min.js"><\/script>')</script>

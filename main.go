@@ -44,6 +44,7 @@ var (
 		AvatarURL       string
 		BaseURL         string
 		API             string
+		PythonAPI		string
 		BanchoAPI       string `description:"Bancho base url (without /api) that hanayo will use to contact bancho"`
 		BanchoAPIPublic string `description:"same as above but this will be put in js files and used by clients. Must be publicly accessible. Leave empty to set to BanchoAPI"`
 		CheesegullAPI   string
@@ -126,6 +127,7 @@ func main() {
 		&config.BanchoAPI:        "https://c.ainu.pw",
 		&config.CheesegullAPI:    "https://storage.ainu.pw/api",
 		&config.API:              "http://localhost:40001/api/v1/",
+		&config.PythonAPI:		  "https://api.ainu.pw/api",
 		&config.APISecret:        "Potato",
 		&config.IP_API:           "https://ip.zxq.co",
 		&config.DiscordServer:    "https://discord.gg/Qp3WQU8",
@@ -287,6 +289,7 @@ func generateEngine() *gin.Engine {
 	r.GET("/clans/create", ccreate)
 	r.POST("/clans/create", ccreateSubmit)
 
+	r.POST("/report", reportUser)
 	r.GET("/u/:user", userProfile)
 	r.GET("/rx/u/:user", relaxProfile)
 	r.GET("/c/:cid", clanPage)

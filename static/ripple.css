@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Exo+2:300,300i,400,400i,500,500i,600,600i,700,700i');
+@font-face {
+  font-family: 'Aller Regular', sans-serif;
+  src: url('/static/font/Aller_Rg.tff')
+}
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -28,6 +32,18 @@
     color: #333;
     cursor: pointer;
 }
+
+.texture {
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  background-image: url('/static/images/pattern.png');
+}
+
 .dropdown-menu.show {
     display: block;
 }
@@ -1218,7 +1234,7 @@ Box shadow and border radius styling
     stroke-opacity: .7;
 }
 
-.nvd3 .nv-parallelCoordinates-brush .extent 
+.nvd3 .nv-parallelCoordinates-brush .extent
 {
     fill: #fff;
     fill-opacity: .6;
@@ -1237,7 +1253,7 @@ fill: none;
 stroke: black;
 stroke-width: 1;
 stroke-opacity: 1;
-stroke-dasharray: 5, 5; 
+stroke-dasharray: 5, 5;
 }
 .nvd3.nv-pie path {
     stroke-opacity: 0;
@@ -1505,4 +1521,349 @@ g > text {
 
 .nv-axis path {
     stroke: #fff;
+}
+
+.kpw--profile--flex {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	padding: 0 10px 10px 10px;
+	margin-top: 5px;
+}
+
+.kpw--profile--bg {
+	min-height: 200px;
+	width: 100%;
+	background-size: cover;
+	background-position: center;
+}
+
+.kpw--profile--avatar {
+	margin-left: 10px;
+	margin-top: -5rem;
+	width: 150px;
+	max-width: 150px;
+	max-height: 150px;
+	margin-top: -2.5rem;
+	box-shadow: 0 1px 3px rgba(0,0,0,.25);
+}
+
+.content .ui.container {
+  font-family: 'Exo 2', sans-serif;
+}
+
+.ui.header {
+	padding: 0;
+	margin: 0;
+}
+
+.kpw--profile--actions {
+	margin-top: 5px;
+	display: flex;
+	flex-direction: column;
+	width: 202px;
+}
+
+.kpw--profile--pactions {
+	margin-bottom: 10px;
+}
+
+p.ranks .clan {
+	font-size: 40px;
+}
+
+p.ranks .rank {
+	font-size: 20px;
+}
+
+.kpw--profile--stats--rank {
+	width: 20px;
+}
+
+.kpw--profile--segment {
+	padding: 0!important;
+}
+
+.kpw--zero {
+	padding-bottom: 0!important;
+}
+
+.kpw--info--block {
+	display: flex; flex-direction: column; width: 100%; height: 100%; align-items: flex-start; padding-left: 10px; margin: 10px;
+}
+
+.kpw--playtime {
+	display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.kpw--playtime h3 {
+	margin: 0;
+    margin-right: 10px;
+}
+
+.kpw--playtime div.timer {
+	padding: 10px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.kpw--mostbms {
+	background-position: center; width: 100%; margin-bottom: 10px; border-radius: 10px;
+}
+
+.kpw--mostbms-container {
+	background-color: rgba(0,0,0,0.5); display: flex; flex-direction: row; justify-content: space-between; padding: 14px; align-items: center; border-radius: 10px;
+}
+
+.kpw--mostbms-container p.songname {
+	margin: 0; width: 100%;
+}
+
+.kpw--mostbms-container div.count {
+	margin: 0; text-align: center;display: flex;align-items: center;justify-content: center;color: orange;font-weight: 700;
+}
+
+.kpw--mostbms-container div.count i {
+	margin-left: 5px; margin-top: -3px;
+}
+
+
+
+@media (max-width: 767px) {
+	.kpw--profile--flex {
+		flex-direction: column!important;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.kpw--profile--flex .title,
+	.kpw--profile--flex .subtitle,
+	.kpw--profile--flex h1 {
+		text-align: center!important;
+	}
+
+	.kpw--info--block {
+		align-items: center!important;
+		justify-content: center;
+	}
+
+	.kpw--profile--avatar {
+		margin-top: -8rem;
+	}
+}
+
+.rounded-avatar {
+    border-radius: 23px;
+}
+
+.bgf {
+    font-size: 40px;
+    font-family: 'Exo 2', sans-serif
+}
+
+#content p.ranks .rank {
+    font-size: 20px;
+    font-family: 'Exo 2', sans-serif
+}
+
+
+.js-landing-graph {
+	z-index: 3;
+	height: 70px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+.landing-graph__area {
+  fill: #465ab5;
+}
+
+.ui.ainu-color {
+  background: #7289EC;
+  color: #fff;
+  margin: 0;
+  transition: background 0.6s;
+}
+
+.ui.ainu-color:hover {
+  background: #4965e0;
+}
+
+.landing-graph__text {
+  text-shadow: 2px 0px 2px rgba(0,0,0,1);
+  font-size: 10px;
+  fill: #fff;
+  pointer-events: none;
+}
+
+.landing-graph__circle {
+	fill: none;
+	stroke-width: 2;
+	stroke: #fff;
+}
+
+.bigfunnylol {
+  display: none;
+}
+
+.welcome-ainu {
+	text-shadow: 0 1px 8px rgba(0,0,0,.75);
+	font-size: 5em;
+	position: relative;
+}
+
+.pls-play-ainu {
+	text-shadow: 0 1px 8px rgba(0,0,0,.75);
+	font-size: 24px;
+	font-weight: lighter;
+	font-style: italic;
+}
+
+.penis-above {
+  position: absolute;
+  font-family: 'Aller Regular', sans-serif;
+  text-align: center;
+  width: 100%;
+  bottom: 0;
+  line-height: normal;
+  top: 33%;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+
+.aobaowo {
+  transform: translateZ(0);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  margin-right: auto!important;
+  margin-left: auto!important;
+  height: 442px;
+  width: calc(100% - 50px);
+  max-width: 328px;
+  background-size: contain;
+  background-image: url('/static/images/aoba2.png');
+  transition: all 1s;
+  filter: brightness(0.6);
+}
+
+@media(max-width: 991px) {
+    .disappearplease {
+        display:none!important
+    }
+    .bigfunnylol {
+      display: block!important;
+      background-image: url('/static/images/image0_1.jpg');
+      width:  732px;
+      height: 500px;
+      background-size: 154%;
+      background-position-x: -263px;
+      background-position-y: -225px;
+    }
+    .penis-above {
+      top: 38%;
+    }
+}
+
+@media(max-width: 596px) {
+  .aobaowo {
+    display: none;
+  }
+  .welcome-ainu {
+    font-size: 3em;
+  }
+  .pls-play-ainu {
+    font-size: 16px;
+  }
+}
+
+.ui.segment.penis-block {
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0px !important;
+}
+
+.penis-video {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.ainu-buttons {
+  margin-top: 15px;
+}
+
+.custom-block {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-family: 'Aller Regular', sans-serif;
+  height: 1000px;
+}
+
+.left-panel {
+  background: #444;
+  width: 66.66%
+}
+
+.right-panel {
+  background: #222;
+  width: 33.33%;
+}
+
+.paddingowo {
+  padding: 20px;
+}
+
+.centerstuff {
+  text-align: center;
+  font-size: 16px;
+}
+
+.ainu-avatar {
+  width: 84px;
+  background-size: cover;
+  height: 84px;
+  margin: 0 auto;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.center-line {
+  height: 2px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5000000px;
+  background: #7289EC;
+  margin-bottom: 16px;
+}
+
+.beatmapimage {
+  height: 100px;
+  filter: brightness(0.4);
+  position: absolute;
+  width: 376px;
+}
+
+.beatmap-information {
+  position: absolute;
+}
+
+.plays-block {
+  position: absolute;
+  right: 84px;
+  padding: 10px;
+  height: 10.3%;
+  background: #3c3c3c;
 }

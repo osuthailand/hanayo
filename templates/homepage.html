@@ -1,110 +1,173 @@
-{{/*###
-Handler=/
-TitleBar=Home Page
-KyutGrill=homepage2.jpg
-*/}}
 {{ define "tpl" }}
 {{ $cf := .ClientFlags }}
 {{ $ds := band $cf 1 }}
 {{ $   := . }}
-
-<div class="ui container">
-<div class="ui center aligned segment">
-	<img src="/static/logos/ainu.png">
-</div>
 {{ $set := systemSettings "website_home_alert" }}
 {{ with $set.website_home_alert.String }}
 	<div class="ui warning message">
 		{{ . | html }}
 	</div>
 {{ end }}
-<style>
-.reviews {
-display: flex;
-flex-direction: column;
-margin-top: 20px;
-}
-.text-h2 {
-font-size: 32px;
-font-weight: 700;
-color: white;
-margin-bottom: 10px;
-}	
-.reviews-row {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	column-gap: 10px;
-	row-gap: 1em;
-}
-.review-single {
-	background-color: rgb(0,0,0,.47);
-	border-radius: 4px;
-	box-shadow: -1px 2px 2px 1px rgba(0, 0, 0, 0.11);
-	padding: 20px;
-	display: flex;
-}
-.reivew-avatar {
-	width: 44px;
-	height: 44px;
-	background-color: black;
-	background-size: cover;
-	border-radius: 200px;
-}
-.review-content {
-	margin-left: 13px;
-	display: flex;
-	flex-direction: column;
-}
-.review-text {
-	font-size: 14px;
-	line-height: 19px;
-	color: #DCDCDC;
-	max-width: 253px;
-}
-.text-h3 {
-	font-size: 20px;
-	color: white;
-	font-weight: 700;
-	line-height: 1;
-	margin-bottom: 8px;
-}	
-</style>
 <div class="ui container">
-	<div class="reviews">
-		<span class="ui header"> Reviews </span>
-		<div class="col-lg-12">
-			<div class="reviews-row">
-				<div id="review" class="review-single">
-				</div>
-				<div id="review-row-2" class="review-single">
-				</div>
-				<div id="review-row-3" class="review-single">
-				</div>
+	<!-- Not logged in is done! -->
+	{{ if not .Context.User.ID }}
+	<div class="ui segment penis-block" style="height: 500px; overflow: hidden;">
+		<div class="penis-video js-scale">
+			<video autoplay="" loop="" muted="" src="/static/images/peniswhore.mp4" class="disappearplease" style="height: 100%; width: 100%; filter: blur(2px);"></video>
+			<div class="bigfunnylol"></div>
+		</div>
+		<div class="aobaowo"></div>
+		<div class="penis-above">
+			<div class="welcome-ainu">Welcome to ainu!</div>
+			<div class="pls-play-ainu">One of the best regular and relax server!</div>
+			<div class="ainu-buttons">
+				<a class="ui ainu-color button" href="/register">Register here!</a>
 			</div>
 		</div>
+		<div class="js-landing-graph" style="left: 0;"></div>
 	</div>
-</div>
-<script type="text/javascript " src="/static/fuckthisshit.js?{{ unixNano }}"></script>
-
-{{/* Not logged in block */}}
-{{ if not .Context.User.ID }}
-	<div class="ui segment">
-		<h1 class="ui header">{{ .T "Welcome to Ainu!" }}</h1>
-		<p>
-			{{ .T "You look new here. Allow us to introduce you to what Ainu! is." }}
-		</p>
-		<p>
-			{{ .T "Ainu! is a private osu! server, featuring multiplayer, PP, a very active community and a development team going strong implementing new features and squashing bugs. <a href='/about'>You can check out even more features here.</a> It has also a very friendly community, and it's <a href='https://github.com/osuthailand'>open source!</a> Just so you know, <b>we currently have %s users online and %s registered users!</b>" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
-		</p>
-		<h3 class="ui header center aligned">{{ .T "What are you waiting for? Join Ainu!! It's risk-free: you won't get your account banned on the official server if you play on Ainu!<br>You can also switch anytime between the official osu! server and Ainu!!" | html }}</h3>
-	</div>
-{{ else }}
-	<div class="ui segment">
-		<h1 class="ui header">{{ .T "Howdy, %s!" .Context.User.Username }}</h1>
-		<p>
-			{{ $OnlineUsers := .Get "https://c.ainu.pw/api/v1/onlineUsers" }}
-			{{ .T "Welcome back to Ainu! We currently have <b>%s online users and %s total registered users.</b> Nice day to farm a few maps, isn't it?" (rediget "ripple:online_users") (rediget "ripple:registered_users") | html }}
-		</p>
+	{{ else }}
+	<!-- I got an idea, but now it's not done... -->
+	<div class="ui segment penis-block" style="height: 500px; overflow: hidden;">
+		<div class="penis-video js-scale">
+			<video autoplay="" loop="" muted="" src="/static/images/peniswhore.mp4" class="disappearplease" style="height: 100%; width: 100%; filter: blur(2px);"></video>
+			<div class="bigfunnylol"></div>
+		</div>
+		<div class="aobaowo"></div>
+		<div class="penis-above">
+			<div class="welcome-ainu">Welcome back, {{ .Context.User.Username }}!</div>
+			<div class="pls-play-ainu">currently <b>{{ .T (rediget "ripple:registered_users") | html }}</b> registered users and <b>{{ .T (rediget "ripple:online_users") | html }}</b> online!</div>
+			<div class="ainu-buttons">
+				<a class="ui ainu-color button" href="/u/{{ .Context.User.ID }}">Your profile</a>
+			</div>
+		</div>
+		<div class="js-landing-graph" style="left: 0;"></div>
 	</div>
 	{{ end }}
+</div>
+<script type="text/javascript" defer="">
+	var jsonStats  = JSON.parse({{ .PenisData }});
+
+  const resizeEl = () => {
+      let needEl = $(".js-scale");
+      if (needEl.length < 1) return;
+
+      let parentSize = needEl[0].parentElement.getBoundingClientRect();
+      let width = null;
+      let height = null;
+
+      if (parentSize.width / parentSize.height > 16 / 9) {
+          width = parentSize.width;
+          height = 9 / 16 * width;
+      } else {
+          height = parentSize.height;
+          width = 16 / 9 * height;
+      }
+
+      if (width && height) {
+          needEl[0].style.height = `${height}px`;
+          needEl[0].style.width = `${width}px`;
+      }
+  }
+
+  window.onload = () => {
+      let graph = new LandingUserStats();
+      $(window).resize(() => {
+          graph.resize();
+      })
+  }
+</script>
+<script type="text/javascript" defer="">
+    class LandingUserStats {
+            constructor() {
+                this.margin = {
+                    top: 40,
+                    right: 0,
+                    bottom: 0,
+                    left: 0
+                };
+                this.peakR = 5;
+                this.svgContainerOuter = d3.select('.js-landing-graph');
+                this.svgContainerOuter.selectAll('svg').remove();
+                this.svgContainerInner = this.svgContainerOuter.append('svg').attr('class', 'landing-graph');
+                this.svg = this.svgContainerInner.append('g').attr('transform', "translate(" + this.margin.left + ", " + (this.margin.top + 1) + ")");
+                this.svgArea = this.svg.append('path').attr('class', 'landing-graph__area');
+                this.svgPeakText = this.svg.append('text').attr('class', 'landing-graph__text').attr('y', -this.peakR * 2);
+                this.svgPeakCircle = this.svg.append('circle').attr('class', 'landing-graph__circle').attr('cy', 0).attr('r', this.peakR);
+                this.scaleX = d3.scaleLinear();
+                this.scaleY = d3.scaleTime();
+                this.area = d3.area().curve(d3.curveBasis).x((function(_this) {
+                    return function(d) {
+                    return _this.scaleX(d.x);
+                    };
+                })(this)).y0((function(_this) {
+                    return function() {
+                    return _this.height;
+                    };
+                })(this)).y1((function(_this) {
+                    return function(d) {
+                    return _this.scaleY(d.y);
+                    };
+                })(this));
+                this.loadData();
+                this.resize();
+            }
+
+            loadData() {
+                this.data = window.jsonStats;
+
+                if (this.data.length < 1) {
+                    return;
+                }
+                let maxVal = 0;
+                this.maxElem = {x:0,y:0};
+                for (let el of this.data) {
+                    if (el.y > maxVal) {
+                        this.maxElem = el
+                        maxVal = el.y;
+                    }
+                }
+                this.scaleX.domain(d3.extent(this.data, function(d) {
+                    return d.x;
+                }));
+                this.scaleY.domain([
+                    0, d3.max(this.data, function(d) {
+                    return d.y;
+                    })
+                ]);
+
+                this.svgPeakText.text(window.T(`Max, ` + this.formatNumber(this.maxElem.y) +` players`));
+                return this.peakTextLength = this.svgPeakText.node().getComputedTextLength();
+            }
+
+            resize() {
+                if (this.data.length < 1) {
+                    return;
+                }
+                this.width = parseInt(this.svgContainerOuter.style('width')) - this.margin.left - this.margin.right;
+                this.height = parseInt(this.svgContainerOuter.style('height')) - this.margin.top - this.margin.bottom;
+                this.scaleX.range([0, this.width]);
+                this.scaleY.range([this.height, 0]);
+                this.svgContainerInner.attr('width', this.width + this.margin.left + this.margin.right).attr('height', this.height + this.margin.top + this.margin.bottom);
+                this.svgArea.datum(this.data).attr('d', this.area);
+                this.svgPeakCircle.attr('cx', this.scaleX(this.maxElem.x));
+                return this.svgPeakText.attr('x', (function(_this) {
+                    return function() {
+                        var rightX;
+                        rightX = _this.scaleX(_this.maxElem.x) + (_this.peakR * 2);
+                        if ((_this.peakTextLength + rightX) > _this.width) {
+                            return _this.scaleX(_this.maxElem.x) - (_this.peakTextLength + (_this.peakR * 2));
+                        } else {
+                            return rightX;
+                        }
+                    };
+                })(this));
+            }
+
+            formatNumber(number) {
+                return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ')
+            }
+					}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js" type="text/javascript"></script>
 {{ end }}

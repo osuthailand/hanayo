@@ -111,17 +111,20 @@ func registerSubmit(c *gin.Context) {
 		return
 	}
 
-	res, err := db.Exec(`INSERT INTO users(username, username_safe, password_md5, salt, email, register_datetime, privileges, password_version)
-							  VALUES (?,        ?,             ?,            '',   ?,     ?,                 ?,          2);`,
+	res, err := db.Exec(`INSERT INTO users(username, username_safe, password_md5, salt, email, register_datetime, privileges, password_version, allowedtoreport)
+							         VALUES (?,           ?,             ?,        '',    ?,       ?,                  ?,     		2, 					1);`,
 		username, safeUsername(username), pass, c.PostForm("email"), time.Now().Unix(), common.UserPrivilegePendingVerification)
 	if err != nil {
 		registerResp(c, errorMessage{T(c, "Whoops, an error slipped in. You might have been registered, though. I don't know.")})
+		fmt.Println(err)
 		return
 	}
 	lid, _ := res.LastInsertId()
 
 	res, err = db.Exec("INSERT INTO `users_stats`(id, username, user_color, user_style, ranked_score_std, playcount_std, total_score_std, ranked_score_taiko, playcount_taiko, total_score_taiko, ranked_score_ctb, playcount_ctb, total_score_ctb, ranked_score_mania, playcount_mania, total_score_mania) VALUES (?, ?, 'black', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);", lid, username)
 	res, err = db.Exec("INSERT INTO `rx_stats`(id, username, user_color, user_style, ranked_score_std, playcount_std, total_score_std, ranked_score_taiko, playcount_taiko, total_score_taiko, ranked_score_ctb, playcount_ctb, total_score_ctb, ranked_score_mania, playcount_mania, total_score_mania) VALUES (?, ?, 'black', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);", lid, username)
+	res, err = db.Exec("INSERT INTO `users_rank`(userid) VALUES(%s)", lid)
+	res, err = db.Exec("INSERT INTO `rx_ranks`(userid) VALUES(%s)", lid)
 	if err != nil {
 		fmt.Println(err)
 	}

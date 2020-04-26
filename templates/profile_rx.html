@@ -1,13 +1,17 @@
 {{ define "tpl" }}
 <div id="content">
 	<div id="user{{ .UserID }}">
-		<div class="ui container">
+		<div class="ui container" style="font-family: 'Exo 2', sans-serif;">
 			{{ if .UserID }}
-				{{ $aoba := eq .UserID 1000 }}
 				{{ $gqm := atoi (.Gin.Query "mode") }}
 				{{ $global := . }}
 				{{ with (.Get "users/rxfull?id=%d" .UserID) }}
 					{{ $favouritemode := _or $gqm .favourite_mode }}
+					<meta property="og:type" content="website" />
+					<meta property="og:url" content="https://ainu.pw/u/{{ .id }}" />
+					<meta property="og:title" content={{ $global.T "<b>%s</b>" .username}} />
+					<meta property="og:description" content={{ $global.T "<b>%s</b> is a osu!Ainu player from <b>%s</b>." .username (country .country true)}} />
+					<meta property="og:image" content="https://a.ainu.pw/{{ .id }}" />
 					<script>
 						window.favouriteMode = {{ $favouritemode }};
 						window.userID = {{ .id }};
@@ -31,268 +35,115 @@
 							<div class="ui error centered message">{{ $global.T "User is <b>%s</b>" "locked" | html }}.</div>
 						{{ end }}
 					{{ end }}
-					{{ with $global.Get "users/userpage?id=%.0f" .id }}
-						{{ if .userpage }}
-							{{ with parseUserpage .userpage }}
-								<div class="ui raised segment twemoji" id="userpage-content">
-									{{ html . }}
-								</div>
-							{{ end }}
-						{{ end }}
-					{{ end }}
-					<div class="ui top attached segment overflow auto">
-						<div class="magic table">
-							<div class="table element">
-								{{ if eq $global.UserID $global.Context.User.ID }}
-									<a href="/settings/avatar">
-								{{ end }}
-										<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="avatar" class="user avatar">
-								{{ if eq $global.UserID $global.Context.User.ID }}
-									</a>
-								{{ end }}
-							</div>
-							<div class="table element">
-								<h1 class="ui header">
-									{{ if $aoba }}							
-									<b>
-
-		<script>
-
-		/*
-		RAINBOW TEXT Script by Matt Hedgecoe (c) 2002
-		Featured on JavaScript Kit
-		For this script, visit http://www.javascriptkit.com
-		*/
-
-		// ********** MAKE YOUR CHANGES HERE
-
-		var text='{{ .username }}' // YOUR TEXT
-		var speed=80 // SPEED OF FADE
-
-		// ********** LEAVE THE NEXT BIT ALONE!
-
-
-		if (document.all||document.getElementById){
-		document.write('<span id="highlight">' + text + '</span>')
-		var storetext=document.getElementById? document.getElementById("highlight") : document.all.highlight
-		}
-		else
-		document.write(text)
-		var hex=new Array("00","14","28","3C","50","64","78","8C","A0","B4","C8","DC","F0")
-		var r=1
-		var g=1
-		var b=1
-		var seq=1
-		function changetext(){
-		rainbow="#"+hex[r]+hex[g]+hex[b]
-		storetext.style.color=rainbow
-		}
-		function change(){
-		if (seq==6){
-		b--
-		if (b==0)
-		seq=1
-		}
-		if (seq==5){
-		r++
-		if (r==12)
-		seq=6
-		}
-		if (seq==4){
-		g--
-		if (g==0)
-		seq=5
-		}
-		if (seq==3){
-		b++
-		if (b==12)
-		seq=4
-		}
-		if (seq==2){
-		r--
-		if (r==0)
-		seq=3
-		}
-		if (seq==1){
-		g++
-		if (g==12)
-		seq=2
-		}
-		changetext()
-		}
-		function starteffect(){
-		if (document.all||document.getElementById)
-		flash=setInterval("change()",speed)
-		}
-		starteffect()
-		</script>
-		</b>
-									{{ else }}
-									{{ .username }}
-									{{ end }}
-								</h1>
-								
-								{{ $oof := . }}
-								
-								{{ if eq $oof.clan.name "" }}
-								{{ $global.T "Clan: None" }}
-								{{ else }}
-								{{ $global.T "Clan: %s" ($oof.clan.name) }}
-								{{ end }}
-								
-								{{ if .username_aka }}
-									<div class="subtitle">
-										{{ $global.T "(aka <b>%s</b>)" (.username_aka | htmlescaper) | html }}
+					<div class="ui stackable column grid">
+						<div class="sixteen wide column kpw--zero">
+							<div class="ui segment kpw--profile--segment">
+								<div class>
+									<div class="kpw--profile--bg" style="background-image: url('https://s.kurikku.pw/profile-covers/c6.jpg');"></div>
+									<div class="kpw--profile--flex">
+										{{ if eq $global.UserID $global.Context.User.ID }}
+										<a href="/settings/avatar">
+										{{ end }}
+												<img src="https://a.ainu.pw/{{ .id }}" alt="avatar" class="rounded-avatar kpw--profile--avatar">
+										{{ if eq $global.UserID $global.Context.User.ID }}
+											</a>
+										{{ end }}
+										<div class="kpw--info--block">
+											<div class="ui header" style="font-size: 2em;">
+												<p class="ranks">
+													<span class="bgf">{{ .username }}</span>
+													{{ range $k, $v := (slice .std .taiko .ctb .mania) }}
+													<span class="rank" data-mode="{{ $k }}"{{ if ne $k (int $favouritemode) }} hidden{{ end }}>({{ with and $v $v.global_leaderboard_rank }}#{{ . }}{{ else }}{{ $global.T "Unknown" }}{{ end }})</span>
+													{{ end }}
+													{{ if and (.badges) (.custom_badge) }}
+															{{ range .badges }}
+																<span class data-tooltip="{{ .name }}" data-inverted="">
+																	<i class="{{ faIcon .icon }} small icon"></i>
+																</span>
+															{{ end }}
+															{{ with .custom_badge }}
+															<span class data-tooltip="{{ .name }}" data-inverted="">
+																<i class="{{ faIcon .icon }} small icon"></i>
+															</span>
+															{{ end }}
+													{{ end }}
+												</p>
+											</div>
+											{{ if .username_aka }}
+												<div class="subtitle">
+													{{ $global.T "(aka <b>%s</b>)" (.username_aka | htmlescaper) | html }}
+												</div>
+											{{ end }}
+											{{ with bgetv1 "isOnline?id=%.0f" .id }}
+												<div class="subtitle">
+													<i class="{{ if .result }}green{{ else }}grey{{ end }} circle icon"></i>
+													{{ if .result }}Online{{ else }}Offline{{ end }} (<b>{{ with $.Get "users/followers?userid=%d" $.UserID }}{{ .subscount }}{{ end }}</b> followers)
+												</div>
+											{{ end }}
+										</div>
+										<div class="kpw--profile--actions">
+											<div id="profile-actions" class="kpw--profile--pactions" style="text-align: center;">
+												{{ if and (ne $global.Context.User.ID $global.UserID) (ne $global.Context.User.ID 0) }}
+													<button class="ui circular mini icon loading button" id="add-friend-button">
+														<i class="horizontal ellipsis icon"></i>
+													</button>
+													<a @click="reportWindow = true" class="ui circular mini orange icon button">
+														<i class="flag icon"></i>
+													</a>
+												{{ end }}
+												{{ if eq $global.Context.User.ID $global.UserID }}
+													<a href="/settings" class="ui circular mini teal icon button"
+														title="{{ $global.T "Settings" }}">
+														<i class="edit icon"></i>
+													</a>
+												{{ end }}
+											</div>
+										</div>
 									</div>
-								{{ end }}
-								{{ with bgetv1 "isOnline?id=%.0f" .id }}
-									<div class="subtitle">
-										<i class="{{ if .result }}green{{ else }}grey{{ end }} circle icon"></i>
-										{{ if .result }}{{ $global.T "Online" }}{{ else }}{{ $global.T "Offline" }}{{ end }}
-									</div>
-								{{ end }}
-							</div>
-						</div>
-						<div class="magic table floating right">
-							<div class="table element">
-								{{ range $k, $v := (slice .std .taiko .ctb .mania) }}
-									<h1 data-mode="{{ $k }}"{{ if ne $k (int $favouritemode) }} hidden{{ end }}>{{ with and $v $v.global_leaderboard_rank }}#{{ . }}{{ else }}{{ $global.T "Not ranked" }}{{ end }}</h1>
-								{{ end }}
-								<div id="profile-actions">
-									{{ if and (ne $global.Context.User.ID $global.UserID) (ne $global.Context.User.ID 0) }}
-										<button class="ui circular mini icon loading button" id="add-friend-button">
-											<i class="horizontal ellipsis icon"></i>
-										</button>
-										<a @click="reportWindow = true" class="ui circular mini orange icon button">
-											<i class="flag icon"></i>
-										</a>
-									{{ end }}
-									{{ if eq $global.Context.User.ID $global.UserID }}
-										<a href="/settings" class="ui circular mini teal icon button"
-											title="{{ $global.T "Settings" }}">
-											<i class="edit icon"></i>
-										</a>
-									{{ end }}
-									{{ if hasAdmin $global.Context.User.Privileges }}
-										<a href="https://old.ainu.pw/index.php?p=103&id={{ $global.UserID }}"
-											target="_blank" title="Quick edit" class="ui circular mini blue icon button">
-											<i class="folder open outline icon"></i>
-										</a>
-									{{ end }}
 								</div>
 							</div>
 						</div>
-					</div>
 					{{ $user := . }}
-					<div class="ui two item bottom attached menu" id="rx-menu">
-							<a class="0 item" data-rx="0" href="/u/{{ $user.id }}">Regular</a>
-							<a class="1 item" data-rx="1" href="/rx/u/{{ $user.id }}">Relax</a>
-					</div>
-					<div class="ui four item bottom attached menu" id="mode-menu">
-						{{ range $k, $v := modes }}
-							<a class="{{ favMode $favouritemode $k }}item" data-mode="{{ $k }}" href="/u/{{ $user.id }}?mode={{ $k }}">{{ $v }}</a>
-						{{ end }}
-					</div>
-					<div class="ui segment">
-						<div class="ui three column divided stackable grid">
-							<div class="row">
-								<div class="column">				
-								
-							{{ $global.T "<b>%s</b> is a" .username | html}} 
+					<div class="five wide column">
+						<div class="ui segment">
+							<div class="ui sixteen stackable grid">
+								<div class="sixteen wide column">
 
-						{{ $owner := (has .privileges 3145727) }}
-						{{ $cm := (has .privileges 15662587) }}
-						{{ $admin := (has .privileges 950527) }}
-						{{ $dev := (has .privileges 1043995) }}
-						{{ $bat := (has .privileges 267) }}
-						{{ $member := (has .privileges 3) }}
-							
-							{{ if $owner }}
-							{{ $global.T "osu!Ainu %s" "Owner" }}
-							{{ else }}
-							{{ if $cm }}
-							{{ $global.T "osu!Ainu %s" "Community Manager" }}
-							{{ else }}
-							{{ if $admin }}
-							{{ $global.T "osu!Ainu %s" "Admin" }}
-							{{ else }}
-							{{ if $dev }}
-							{{ $global.T "osu!Ainu %s" "Developer" }}
-							{{ else }}
-							{{ if $bat }}
-							{{ $global.T "osu!Ainu %s" "BAT" }}
-							{{ else }}
-							{{ if $member }}
-							{{ $global.T "osu!Ainu %s" "Player" }}
-							{{ else }}
-							{{end}}{{end}}{{end}}{{end}}{{end}}{{end}}
+									{{ $global.T "<b>%s</b> is a" .username | html}}
 
+									{{ $owner := (has .privileges 3145727) }}
+									{{ $cm := (has .privileges 15662587) }}
+									{{ $admin := (has .privileges 950527) }}
+									{{ $dev := (has .privileges 1043995) }}
+									{{ $bat := (has .privileges 267) }}
+									{{ $member := (has .privileges 3) }}
+									<b>
+										{{ if $owner }}
+										{{ $global.T "Owner" }}
+										{{ else if $cm }}
+										{{ $global.T "Community Manager" }}
+										{{ else if $admin }}
+										{{ $global.T "Admin" }}
+										{{ else if $dev }}
+										{{ $global.T "Developer" }}
+										{{ else if $bat }}
+										{{ $global.T "BAT" }}
+										{{ else if $member }}
+										{{ $global.T "Player" }}
+										{{ else }}
+										{{end}}
+									</b>
 									{{ $global.T "from <b>%s</b>." (country .country true) | html }}
-									<br>{{ $global.T "They signed up on osu!Ainu %s." (time $user.registered_on) | html }}
+									<br>{{ $global.T "They signed up on %s." (time $user.registered_on) | html }}
 									<br>{{ $global.T "Last seen: %s." (time $user.latest_activity) | html }}
 									<br>{{ with playstyle .play_style $global }}{{ $global.T "They play with %s." . }}{{ end }}
-									<div class="ui five column grid container" style="margin-top: 50px;">
-										<div class="centered column">
-											<img class="ui centered small image" src="/static/ranking-icons/SSHD.svg">
-											
-											<p id="XH"></p>
-										</div>
-										<div class="centered column">
-											<img class="ui centered small image" src="/static/ranking-icons/SS.svg">
-											
-											<p id="X"></p>
-										</div>
-										<div class="centered column">
-											<img class="ui centered small image" src="/static/ranking-icons/SHD.svg">
-											
-											<p id="SH"></p>
-										</div>
-										<div class="centered column">
-											<img class="ui centered small image" src="/static/ranking-icons/S.svg">
-											
-											<p id="S"></p>
-										</div>
-										<div class="centered column">
-											<img class="ui centered small image" src="/static/ranking-icons/A.svg">
-											
-											<p id="A"></p>
-										</div>
-									</div>
 								</div>
-								
-		 							<meta property="og:type" content="website" />
-									<meta property="og:url" content="https://ainu.pw/u/{{$user.id}}" />
-									<meta property="og:title" content={{ $global.T "<b>%s</b>" .username}} />
-									<meta property="og:description" content={{ $global.T "<b>%s</b> is a osu!Ainu player from <b>%s</b>." .username (country .country true)}} />
-									<meta property="og:image" content="https://a.ainu.pw/{{$user.id}}" />
-									
-								<div class="column">
-									{{ if and (not .badges) (not .custom_badge) }}
-										{{ $global.T "This user hasn't got any badges!" }}
-									{{ else }}
-										<div class="ui grid">
-											{{ range .badges }}
-												<div class="eight wide centered column">
-													<i class="circular {{ faIcon .icon }} big icon"></i><br>
-													<b>{{ .name }}</b>
-												</div>
-											{{ end }}
-											{{ with .custom_badge }}
-												<div class="eight wide centered column">
-													<i class="circular {{ faIcon .icon }} big icon"></i><br>
-													<b><i>{{ .name }}</i></b>
-												</div>
-											{{ end }}
-										</div>
-									{{ end }}
-								</div>
-								<div class="column">
+								<div class="sixteen wide column">
 									{{ range $k, $v := (slice .std .taiko .ctb .mania) }}
-									{{ $maxcombo := qb "SELECT FORMAT(scores_relax.max_combo,0) AS combo FROM scores_relax WHERE userid = ? ORDER BY max_combo DESC;" $.UserID}}
+									{{ $maxcombo := qb "SELECT FORMAT(scores.max_combo,0) AS combo FROM scores WHERE userid = ? ORDER BY max_combo DESC;" $.UserID}}
 										<div data-mode="{{ $k }}" {{ if ne $k (int $favouritemode) }} hidden{{ end }}>
 											<table class="ui very basic two column compact table nopad">
 												<tbody>
-													
 													{{ with .global_leaderboard_rank }}
 														<tr>
 															<td><b>{{ $global.T "Global rank" }}</b></td>
@@ -322,8 +173,8 @@
 														<td class="right aligned">{{ humanize .playcount }}</td>
 													</tr>
 													<tr>
-														<td><b>{{ $global.T "Max combo" }}</b></td>
-														<td class="right aligned">{{ $maxcombo.combo }}</td>
+														<td><b>{{ $global.T "Maximum Combo" }}</b></td>
+														<td class="right aligned">{{ if $maxcombo.combo }}{{ $maxcombo.combo }}{{ else }}0{{ end }}</td>
 													</tr>
 													<tr>
 														<td><b>{{ $global.T "Followers" }}</b></td>
@@ -340,6 +191,22 @@
 														<td><b>{{ $global.T "Accuracy" }}</b></td>
 														<td class="right aligned">{{ printf "%.2f" .accuracy }}%</td>
 													</tr>
+													<tr>
+														<td><img class="kpw--profile--stats--rank" alt="Ranks SS+" src="https://kurikku.pw/static/ranking-icons/SSHD.png"></td>
+														<td class="right aligned" id="XH"></td>
+													</tr>
+													<tr>
+														<td><img class="kpw--profile--stats--rank" alt="Ranks SS" src="https://kurikku.pw/static/ranking-icons/SS.png"></td>
+														<td class="right aligned" id="X"></td>
+													</tr>
+													<tr>
+														<td><img class="kpw--profile--stats--rank" alt="Ranks S+" src="https://kurikku.pw/static/ranking-icons/SHD.png"></td>
+														<td class="right aligned" id="SH"></td>
+													</tr>
+													<tr>
+														<td><img class="kpw--profile--stats--rank" alt="Ranks A" src="https://kurikku.pw/static/ranking-icons/A.png"></td>
+														<td class="right aligned" id="A"></td>
+													</tr>
 												</tbody>
 											</table>
 											<div class="ui blue progress little margin top" data-percent="{{ levelPercent .level }}">
@@ -352,95 +219,104 @@
 									{{ end }}
 								</div>
 							</div>
+						</div> <!-- end grid segment -->
+					</div>
+					<div class="eleven wide column">
+						{{ with $global.Get "users/userpage?id=%.0f" .id }}
+							{{ if .userpage }}
+									{{ with parseUserpage .userpage }}
+										<div class="ui raised segment twemoji" id="userpage-content">
+														{{ html . }}
+										</div>
+								{{ end }}
+							{{ end }}
+						{{ end }}
+						<div class="ui two item bottom attached menu" id="rx-menu">
+							<a class="0 item" data-rx="0" href="/u/{{ $user.id }}">Regular</a>
+							<a class="1 item" data-rx="1" href="/rx/u/{{ $user.id }}">Relax</a>
 						</div>
-					</div> <!-- end grid segment -->
-					<div id="scores-zone">
+						<div class="ui four item bottom attached menu" id="mode-menu">
+						{{ range $k, $v := modes }}
+							<a class="{{ favMode $favouritemode $k }}item" data-mode="{{ $k }}" href="/u/{{ $user.id }}?mode={{ $k }}">{{ $v }}</a>
+						{{ end }}
+						</div>
+						{{ if hasAdmin $global.Context.User.Privileges }}
+						<div id="chart1" class="ui raised segment">
+							<svg style="height: 250px; width: 100%" class="nvd3-svg">
+							</svg>
+						</div>
+						{{ end }}
+						<div id="scores-zone">
 						{{ range _range 4 }}
 							<div data-mode="{{ . }}" {{ if ne . (int $favouritemode) }} hidden{{ end }} data-loaded="0">
 							</div>
 						{{ end }}
 					</div>
-
-					<div class="ui segment">
-						<h2 class="ui header">{{ $global.T "Achievements" }}</h2>
-						<div id="achievements" class="ui grid">
-						</div>
-						<div class="right aligned">
-							<button class="ui disabled button" id="load-more-achievements">
-								{{ $global.T "Load more" }}
-							</button>
-						</div>
-					</div>
-					<div class="ui modal">
-						<i class="close icon"></i>
-						<div class="content">
-							<table class="ui definition table" id="score-data-table">
-							</table>
-						</div>
 					</div>
 				</div>
-				<div class="ui container">           
-	                	<div v-show="reportWindow" style="display: none;">
-							<div class="report-window-bg" @click="reportWindow = false"></div>
-	                    		<div class="report-window">
-		                            <form v-if="reportStatus == 0" class="report-content">
-	                                    <div class="report-icon" style="margin-bottom: auto;">
-	                                        <i class="fas fa-exclamation-triangle"></i>
-	                                    </div>
-	                                    <div class="report-player-warning">
-	                                        Report <b>{{ .username }}</b>?
-	                                    </div>
-	                                    <div class="report-adtext">
-	                                        Reason
-	                                    </div>
-	                                    <div class="dropdown">
-	                                        <select id="reasonpicker" class="selectpicker" data-style="report-dropdown" data-width="100%">
-	                                            <option value='Foul play / Cheating'>Foul play / Cheating</option>
-	                                            <option value='Spamming'>Spamming</option>
-	                                            <option value='Other (type below)' selected>Other (type below)</option>
-	                                        </select>
-	                                    </div>
-	                                    <div class="report-adtext">
-	                                        Comment
-	                                    </div>
-	                                    <textarea v-model="reportComment" placeholder="Please provide any information you believe could be useful." class="report-addreason" style="overflow: auto; resize: none; height: 150px">
-	                                    </textarea>
-	                                    <a href="#" @click.prevent="submitReport" :class="'report-window-btn btn-danger'+(reportComment == '' ? ' disabled' : '')">
-	                                        Report
-	                                    </a>
-	                                    <a href="#"  @click="reportWindow = false" class="report-window-btn btn-gray-dark">
-	                                        Cancel
-	                                    </a>
-	                            	</form>
-		                            <div v-else class="report-content">
-			                            <div class="report-icon">
-	                                        <i class="fas fa-exclamation-triangle"></i>
-		                                </div>
-		                                <div class="report-player-warning">
-		                                    <b>Thanks for your report!</b>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-		                </div>
-			        </div>
+				<div class="ui container">
+                	<div v-show="reportWindow" style="display: none;">
+						<div class="report-window-bg" @click="reportWindow = false"></div>
+                    		<div class="report-window">
+	                            <form v-if="reportStatus == 0" class="report-content">
+                                    <div class="report-icon" style="margin-bottom: auto;">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="report-player-warning">
+                                        Report <b>{{ .username }}</b>?
+                                    </div>
+                                    <div class="report-adtext">
+                                        Reason
+                                    </div>
+                                    <div class="dropdown">
+                                        <select id="reasonpicker" class="selectpicker" data-style="report-dropdown" data-width="100%">
+                                            <option value='Foul play / Cheating'>Foul play / Cheating</option>
+                                            <option value='Spamming'>Spamming</option>
+                                            <option value='Other (type below)' selected>Other (type below)</option>
+                                        </select>
+                                    </div>
+                                    <div class="report-adtext">
+                                        Comment
+                                    </div>
+                                    <textarea v-model="reportComment" placeholder="Please provide any information you believe could be useful." class="report-addreason" style="overflow: auto; resize: none; height: 150px">
+                                    </textarea>
+                                    <a href="#" @click.prevent="submitReport" :class="'report-window-btn btn-danger'+(reportComment == '' ? ' disabled' : '')">
+                                        Report
+                                    </a>
+                                    <a href="#"  @click="reportWindow = false" class="report-window-btn btn-gray-dark">
+                                        Cancel
+                                    </a>
+                            	</form>
+	                            <div v-else class="report-content">
+		                            <div class="report-icon">
+                                        <i class="fas fa-exclamation-triangle"></i>
+	                                </div>
+	                                <div class="report-player-warning">
+	                                    <b>Thanks for your report!</b>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+									<script> var mode = {{ $favouritemode }}; </script>
+					{{ end }}
 				{{ end }}
-			{{ end }}
 			<script>
 				var userID = {{ .UserID }};
 				var personalID = {{ .Context.User.ID }};
 				var allowed = {{ .Allowedtoreport }};
 
+				var rx = 1;
+				var pythonApi = {{ .Conf.PythonAPI }};
 			</script>
 		</div>
 	</div>
 </div>
-<!-- owo, looks like simon made a fucky-wucky -->
+<!-- pp graph !!	!"3487231094783924" -->
+<script src="https://osu.gatari.pw/static/js/d3.v3.js" type="text/javascript"></script>
+<script src="https://osu.gatari.pw/static/js/nv.d3.js" type="text/javascript"></script>
+<!-- Ignore this please -->
 <script src="https://osu.gatari.pw/static/js/jquery/jquery.min.js"></script>
-<script src="https://osu.gatari.pw/static/js/jquery/i18nextXHRBackend.min.js"></script>
-<script src="https://osu.gatari.pw/static/js/jquery/i18next.min.js"></script>
-<script src="https://osu.gatari.pw/static/js/i18n.js"></script>
-<script src="https://osu.gatari.pw/static/js/jquery/jquery.pjax.js"></script>
 <script src="https://osu.gatari.pw/static/js/jquery/twemoji.min.js"></script>
 <script src="https://osu.gatari.pw/static/js/bootstrap/popper.min.js"></script>
 <script src="https://osu.gatari.pw/static/js/bootstrap/bootstrap.min.js"></script>
@@ -449,8 +325,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/9.0.0/nouislider.min.js?1535643751702396253"></script>
 <script src="https://osu.gatari.pw/static/js/socket_module.js"></script>
 <script src="https://kit.fontawesome.com/384cb6e847.js" crossorigin="anonymous"></script>
-<script src="https://osu.gatari.pw/static/js/vue_modules/vue.min.js"></script>    
+<script src="https://osu.gatari.pw/static/js/vue_modules/vue.min.js"></script>
 <script src="https://osu.gatari.pw/static/js/vue_modules/vue-axios-plugin.min.js"></script>
 <script src="https://osu.gatari.pw/static/js/vue_modules/vue-timeago.min.js"></script>
-<script src="/static/report.js?{{ unixNano }}"></script> 
+<script src="/static/report.js?{{ unixNano }}"></script>
 {{ end }}

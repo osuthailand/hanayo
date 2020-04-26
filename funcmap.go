@@ -394,6 +394,16 @@ var funcMap = template.FuncMap{
 		json.Unmarshal(data, &x)
 		return x
 	},
+	"bgetv2": func(ept string, qs ...interface{}) map[string]interface{} {
+		d, err := http.Get(fmt.Sprintf(config.PythonAPI+"/api/"+ept, qs...))
+		if err != nil {
+			return nil
+		}
+		x := make(map[string]interface{})
+		data, _ := ioutil.ReadAll(d.Body)
+		json.Unmarshal(data, &x)
+		return x
+	},
 	// styles returns playstyle.Styles
 	"styles": func() []string {
 		return playstyle.Styles[:]

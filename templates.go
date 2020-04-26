@@ -259,6 +259,7 @@ type templateConfig struct {
 	Handler          string
 	TitleBar         string
 	KyutGrill        string
+	DisableHH         bool
 	MinPrivileges    uint64
 	HugeHeadingRight bool
 	AdditionalJS     string
