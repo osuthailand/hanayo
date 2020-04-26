@@ -261,7 +261,7 @@ msgid "Documentation"
 msgstr "문서화"
 
 msgid "Server switcher"
-msgstr ""
+msgstr "서버 스위치"
 
 msgid "Status"
 msgstr "상태"
@@ -440,6 +440,21 @@ msgstr "홈페이지"
 
 msgid "Leaderboard"
 msgstr "리더보드"
+
+msgid "Community"
+msgstr "커뮤니티"
+
+msgid "Top Plays"
+msgstr "최고 점수 (PP)"
+
+msgid "Multiplayer listing"
+msgstr "멀티플레이어의목록"
+
+msgid "Tournaments"
+msgstr "토너먼트"
+
+msgid "Discord Server"
+msgstr "디스코드 초대"
 
 msgid "Help"
 msgstr "도움말"

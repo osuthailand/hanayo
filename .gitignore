@@ -3,6 +3,11 @@ hanayo
 hanayo.conf
 team.json
 static/profbackgrounds/*
+static/Natsue Skin (Windows XP).osk
+static/ainu!seasonal.dll
+static/ainu!ui.dll
+static/ainu.ico
+static/bmcovers/*
 !static/profbackgrounds/.keep
 semantic/gulpfile.tmp.*.js
 /_

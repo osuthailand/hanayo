@@ -20,6 +20,7 @@
 			<div class="ui dropdown item">
 				<span>{{ .T "Community" }}</span>
                 <div class="menu">
+                	{{ navbarItem .Path (.T "Top Plays") "/plays" }}
                     {{ navbarItem .Path (.T "Multiplayer listing") "https://multi.ainu.pw" }}
                     {{/* {{ navbarItem .Path (.T "Tournaments") "https://tourn.ainu.pw" }} */}}
                     <div class="divider"></div>

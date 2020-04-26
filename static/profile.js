@@ -11,6 +11,7 @@ $(document).ready(function() {
 		window.history.replaceState('', document.title, newPathName + "?mode=" + favouriteMode + wl.hash);
 	else if (wl.pathname != newPathName)
 		window.history.replaceState('', document.title, newPathName + wl.search + wl.hash);
+	loadRanks(userID, favouriteMode);
 	setDefaultScoreTable();
 	// when an item in the mode menu is clicked, it means we should change the mode.
 	$("#mode-menu>.item").click(function(e) {
@@ -26,6 +27,7 @@ $(document).ready(function() {
 			initialiseScores(needsLoad, m);
 		$(this).addClass("active");
 		window.history.replaceState('', document.title, wl.pathname + "?mode=" + m + wl.hash);
+		loadRanks(userID, m);
 	});
 	initialiseAchievements();
 	initialiseFriends();
@@ -40,6 +42,16 @@ $(document).ready(function() {
 	loadOnlineStatus();
 	setInterval(loadOnlineStatus, 10000);
 });
+
+function loadRanks(userid, mode) {
+    api("users/ranks", {id: userid, m: mode, rx: 0}, (res) => {
+        $("#XH").text(res.xh);
+        $("#X").text(res.x);
+        $("#SH").text(res.sh);
+        $("#S").text(res.s);
+        $("#A").text(res.a);
+    })
+}
 
 function formatOnlineStatusBeatmap(a) {
 	var hasLink = a.beatmap.id > 0;

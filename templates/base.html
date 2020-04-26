@@ -104,47 +104,48 @@
 				</div>
 				{{ template "tpl" . }}
 			</div>
-<p>
-<br />
-		<center><div class="footer twemoji">
-			
-			<font style='color:black'>
-			{{ if $ds }}<font style='color:white' >{{ end }}
-			{{ .T "&copy; 2018-%d Ripple, osu!Ainu, Made with love by Aoba ❤ using Hanayo %s" (curryear) (version) | html }}  |
-			<a href="/team" title="{{ .T "Who is working on this thing?" }}"><i class="users icon"></i>{{ .T "Team" }}</a> |
-			<a href="https://github.com/osuthailand" title="{{ .T "What's going on under the hood?"}}{{/*'"*/}}"><i class="git square icon"></i></a>
-			<div class="ui scrolling dropdown" style="margin-left: 5px;" id="language-selector">
-				{{ $lang := .Context.Language }}
-				{{ with $lang }}
-					{{ $info := languageInformationByNameShort . }}
-					<div class="text"><i class="{{ with $lang }}{{ . }}{{end}} flag"></i>{{ $info.Name }}</div>
-				{{ else }}
-					<div class="default text">{{ .T "Language" }}</div>
-				{{ end }}
-				<i class="dropdown icon"></i>
-				<div class="menu">
-					{{ range languageInformation }}
-						<div class="{{ if eq .NameShort $lang }}selected {{ end }}item" data-lang="{{ .NameShort }}"><i class="{{ .CountryShort }} flag"></i>{{ .Name }}</div>
-					{{ end }}
-				</div>
-				</div>
-			<br>Ainu is not affiliated with ppy Pty Ltd in any way.<br>"osu!" is a trademark of ppy Pty Ltd.
-			</font>
-		</div>
-		</center>
+			<p>
+			<br />
+			<center>
+			    <div class="footer twemoji">
+			        <font style='color:black'>
+			            {{ if $ds }}<font style='color:white'>{{ end }}
+			                {{ .T "&copy; 2018-%d Ripple, osu!Ainu, Made with love by Aoba ❤ using Hanayo %s" (curryear) (version) | html }} |
+			                <a href="/team" title='{{ .T "Who is working on this thing?" }}'><i class="users icon"></i>{{ .T "Team" }}</a> |
+							<a href="https://github.com/osuthailand" title="{{ .T "What's going on under the hood?"}}{{/*'"*/}}"><i class="git square icon"></i></a>
+			                <div class="ui scrolling dropdown" style="margin-left: 5px;" id="language-selector">
+			                    {{ $lang := .Context.Language }}
+			                    {{ with $lang }}
+			                    {{ $info := languageInformationByNameShort . }}
+			                    <div class="text"><i class="{{ with $lang }}{{ . }}{{end}} flag"></i>{{ $info.Name }}</div>
+			                    {{ else }}
+			                    <div class="default text">{{ .T "Language" }}</div>
+			                    {{ end }}
+			                    <i class="dropdown icon"></i>
+			                    <div class="menu">
+			                        {{ range languageInformation }}
+			                        <div class="{{ if eq .NameShort $lang }}selected {{ end }}item" data-lang="{{ .NameShort }}"><i class="{{ .CountryShort }} flag"></i>{{ .Name }}</div>
+			                        {{ end }}
+			                    </div>
+			                </div>
+			                <br>Ainu is not affiliated with ppy Pty Ltd in any way.<br>"osu!" is a trademark of ppy Pty Ltd.
+			            </font>
+			    </div>
+			</center>
 		<script>
 			var hanayoConf = {
 				avatars:   {{ .Conf.AvatarURL }},
 				banchoAPI: {{ .Conf.BanchoAPIPublic }},
 				baseAPI:   {{ .Conf.BaseAPIPublic }},
 				cheesegullAPI: {{ .Conf.CheesegullAPI }},
+				pythonAPI: {{ .Conf.PythonAPI }},
 				language:  {{ with $lang }}{{ . }}{{ else }}"en"{{ end }},
 			};
 			var currentUserID = {{ .Context.User.ID }};
 		</script>
 		{{/* If we got some more scripts to print, print'em */}}
 		<script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.2"></script>
-		<script src="/static/dist.min.js?{{ unixNano }}"></script>
+		<script src="/static/dist.min.js?{{ unixNano }}2"></script>
 		<script src="/static/timeago-locale/jquery.timeago.{{ with $lang }}{{ . }}{{end}}.js"></script>
 		{{/* <script src="/static/live2dw/lib/L2Dwidget.min.js?{{ unixNano }}"></script><script>L2Dwidget.init({"pluginRootPath":"static/live2dw/","pluginJsPath":"/static/lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/static/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body> */}}
 		{{ if .Scripts }}

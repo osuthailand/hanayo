@@ -1,0 +1,115 @@
+{{/*###
+Handler=/plays
+DisableHH=true
+TitleBar=top plays
+*/}}
+{{ define "tpl" }}
+{{ $cf := .ClientFlags }}
+{{ $ds := band $cf 1 }}
+<div id="TopPlays">
+	{{ if $ds }}
+		<link rel="stylesheet" href="/static/css/top_plays.dark.css">
+	{{ else }}
+		<link rel="stylesheet" href="/static/css/top_plays.css">
+	{{ end }}
+	<div class="ui container" v-bind:class="{ 'load' : load }">
+		<div style="display: flex;">
+			<div class="selector">
+	    		<a :class="'simple-banner-swtich '+(relax == 0 ? 'switch--active' : '')" @click="relax = 0">Regular</a>
+	    		<a :class="'simple-banner-swtich '+(relax == 1 ? 'switch--active' : '')" @click="relax = 1">Relax</a>
+			</div>
+
+			<div class="selector reversed">
+		    	<a :class="'simple-banner-swtich--reversed '+(period == 'all' ? 'switch--active' : '')" @click="period = 'all'">All time</a>
+		    	<a :class="'simple-banner-swtich--reversed '+(period == 'month' ? 'switch--active' : '')" @click="period = 'month'">Month</a>
+		    	<a :class="'simple-banner-swtich--reversed '+(period == 'week' ? 'switch--active' : '')" @click="period = 'week'">Week</a>
+			</div>
+		</div>
+		<div class="mode-selector">
+			<a :class="'mode-change '+(mode == 0 ? '--selected' : '')" @click="mode = 0">osu!std</a>
+			<a :class="'mode-change '+(mode == 1 ? '--selected' : '')" @click="mode = 1">osu!taiko</a>
+			<a :class="'mode-change '+(mode == 2 ? '--selected' : '')" @click="mode = 2">osu!catch</a>
+			<a :class="'mode-change '+(mode == 3 ? '--selected' : '')" @click="mode = 3">osu!mania</a>
+		</div>
+		<div class="huge heading dropped plays" :style="plays[0] ? 'background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(https://assets.ppy.sh/beatmaps/'+plays[0].beatmapset_id+'/covers/cover.jpg)' : ''">
+		    <div class="ui container plays full-height">
+			<h1 style="z-index: 1;">Top plays</h1>
+			</div>
+		</div>
+		<div class="main-block" v-if="plays.length > 0" v-bind:class="{ 'load' : load }">
+			<div v-for="play in plays" class="single-play-block">
+				<a target="_blank" :href="'/b/'+play.beatmap_id" class="play-map-preview" :style="'background-image: url('+(play.beatmapset_id > 9999999 ? 'https://ainu.pw/static/bmcovers/'+play.beatmapset_id+'.jpg' : 'https://assets.ppy.sh/beatmaps/'+play.beatmapset_id+'/covers/card.jpg')+');'">
+			        <span :class="'map-rank rank-'+play.rank"></span>
+			        <span class="play-map-name">
+			            <% play.song_name %>
+			        </span>
+			    </a>
+			    <div class="player-pp-info">
+			        <span class="player-name">
+			            <a :href="'/u/'+play.userid" class="player-username">
+			                <% play.username %> </a>
+			        </span>
+			        <span class="play-pp">
+			            <% Math.round(play.pp) %>pp
+			        </span>
+			    </div>
+			    <div class="br-line"></div>
+			    <div class="play-main-info">
+			        <div class="info-single">
+			            <span class="info-topic">
+			                combo
+			            </span>
+			            <span class="info-content">
+			                <% play.combo %>/
+			                <% play.fc %>
+			            </span>
+			        </div>
+			        <div class="info-single">
+			            <span class="info-topic">
+			                accuracy
+			            </span>
+			            <span class="info-content">
+			                <% play.accuracy.toFixed(2) %>%
+			            </span>
+			        </div>
+			        <div class="info-single">
+			            <span class="info-topic">
+			                mods
+			            </span>
+			            <span class="info-content" v-if="play.mods > 0">
+			                <% getScoreMods(play.mods, false) %>
+			            </span>
+			            <span class="info-content" v-else>
+			            	None
+			            </span>
+			        </div>
+			        <div class="info-single">
+			            <span class="info-topic">
+			                date
+			            </span>
+			            <span class="info-content">
+			                <timeago :datetime="new Date(play.time * 1000)" :auto-update="60"></timeago>
+			            </span>
+			        </div>
+			    </div>
+			</div>
+		</div>
+		<div class="no-scores" v-else-if="!load" style="display: none;">
+		    <div class="sorry-block">
+		        <div class="sorry-title">Oh no...</div>
+		        <div class="sorry-to-inform"><% period == 'month' ? 'There is no scores set for this  month!' : 'There is no scores set for this week!' %></div>
+		    </div>
+ 			<div class="nothing-to-see"></div>
+		</div>
+	</div>
+	<script>
+		var pythonAPI = {{ .Conf.PythonAPI }}
+	</script>
+</div>
+<script src="/static/js/jquery/jquery.min.js"></script>
+<script src="/static/vue_modules/vue.min.js"></script>
+<script src="/static/vue_modules/vue-axios-plugin.min.js"></script>
+<script src="/static/vue_modules/vue-timeago.min.js"></script>
+<script src="/static/vue/mixins/generalMixins.js?14882020"></script>
+<script src="/static/vue/pages/top_plays.js?14882020"></script>
+{{ end }}
