@@ -6,46 +6,64 @@ MinPrivileges=2
 */}}
 {{ define "tpl" }}
 {{ $ := . }}
-<div class="ui container">
-	<div class="ui raised segment center aligned">
-		{{ $f := ieForm .Gin }}
-		<h4>{{ .T "Want to play an unranked beatmap and get pp? You can submit beatmaps rank requests here!" }}</h4>
-		{{ with .Get "beatmaps/rank_requests/status" }}
-			<h4 class="ui horizontal divider header">
-				<i class="wait icon"></i>
-				{{ $.T "Queue status" }}
-			</h4>
-			<h2 style="display: inline; font-weight: normal;"><span id="queue-info">{{ .submitted }}/{{ .queue_size }}</span> <i{{ if not .submitted_by_user }} hidden{{ end }} id="by-you">(<span id="submitted-by-user">{{ .submitted_by_user }}</span>/<span id="max-per-user">{{ .max_per_user }}</span> {{ $.T "by you" }})</i></h2><br>
-			<h3 style="display: inline; font-weight: normal;">{{ $.T "Requests submitted" }}</h3><br>
-			<h4 style="display: inline; font-weight: normal;">{{ $.T "In the past 24 hours" }}</h4><br>
-			{{ $perc := perc .submitted .queue_size }}
-			<div class="ui container" style="width: 50%; margin-top: 8px; margin-bottom: 8px;">
-				<div class="ui green progress" data-percent="{{ $perc }}" id="progressbar">
-					<div class="bar">
-						<div class="progress">{{ $perc }}%</div>
+<!-- for ainu cloners, you have to make YOUR OWN api for the last part or you could just remove it. -->
+<div id="requests{{ .Context.User.ID }}">
+	<div class="ui container">
+		<div class="ui raised segment center aligned">
+			{{ $f := ieForm .Gin }}
+			<h4>{{ .T "Want to play an unranked beatmap and get pp? You can submit beatmaps rank requests here!" }}</h4>
+			{{ with .Get "beatmaps/rank_requests/status" }}
+				<h4 class="ui horizontal divider header">
+					<i class="wait icon"></i>
+					{{ $.T "Queue status" }}
+				</h4>
+				<h2 style="display: inline; font-weight: normal;"><span id="queue-info">{{ .submitted }}/{{ .queue_size }}</span> <i{{ if not .submitted_by_user }} hidden{{ end }} id="by-you">(<span id="submitted-by-user">{{ .submitted_by_user }}</span>/<span id="max-per-user">{{ .max_per_user }}</span> {{ $.T "by you" }})</i></h2><br>
+				<h3 style="display: inline; font-weight: normal;">{{ $.T "Requests submitted" }}</h3><br>
+				<h4 style="display: inline; font-weight: normal;">{{ $.T "In the past 24 hours" }}</h4><br>
+				{{ $perc := perc .submitted .queue_size }}
+				<div class="ui container" style="width: 50%; margin-top: 8px; margin-bottom: 8px;">
+					<div class="ui green progress" data-percent="{{ $perc }}" id="progressbar">
+						<div class="bar">
+							<div class="progress">{{ $perc }}%</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<h4 class="ui horizontal divider header">
-				<i class="music icon"></i>
-				{{ $.T "Request a beatmap" }}
-			</h4>
-			{{ if .can_submit }}
-				<form class="ui form" id="b-form">
-					<div class="ui fluid action input">
-						<input tabindex="1" type="text" placeholder="https://osu.ppy.sh/s/xxxx" id="beatmap">
-						{{ $f }}
-						<button tabindex="2" class="ui right labeled icon green button">
-							<i class="right arrow icon"></i>
-							{{ $.T "Submit" }}
-						</button>
-					</div>
-				</form>
-			{{ else }}
-				<h3 class="ui header">{{ $.T "You cannot currently request beatmaps!" }}</h3>
-				{{ with .next_expiration }}<p>{{ $.T "Please try again " }}<b>{{ timeAddDay . }}</b></p>{{ end }}
+				<h4 class="ui horizontal divider header">
+					<i class="music icon"></i>
+					{{ $.T "Request a beatmap" }}
+				</h4>
+				{{ if .can_submit }}
+					<form class="ui form" id="b-form">
+						<div class="ui fluid action input">
+							<input tabindex="1" type="text" placeholder="https://osu.ppy.sh/s/xxxx" id="beatmap">
+							{{ $f }}
+							<button tabindex="2" class="ui right labeled icon green button">
+								<i class="right arrow icon"></i>
+								{{ $.T "Submit" }}
+							</button>
+						</div>
+					</form>
+				{{ else }}
+					<h3 class="ui header">{{ $.T "You cannot currently request beatmaps!" }}</h3>
+					{{ with .next_expiration }}<p>{{ $.T "Please try again " }}<b>{{ timeAddDay . }}</b></p>{{ end }}
+				{{ end }}
 			{{ end }}
-		{{ end }}
+		</div>
+		<div v-if="requests.length > 0" v-bind:class="{ 'load' : load }">
+			<div class="request-block" v-for="request in requests">
+				<div class="response-block" v-if="showComment = true">
+					<% request.checked_by %>
+				</div>
+				<% request.userid %>
+			</div>
+		</div>
+		<script>
+			var userID = {{ .Context.User.ID }};
+		</script>
 	</div>
 </div>
+<script src="https://osu.gatari.pw/static/js/vue_modules/vue.min.js"></script>
+<script src="https://osu.gatari.pw/static/js/vue_modules/vue-axios-plugin.min.js"></script>
+<script src="https://osu.gatari.pw/static/js/vue_modules/vue-timeago.min.js"></script>
+<script src="/static/vue/pages/requests.js?{{ unixNano }}"></script>
 {{ end }}
