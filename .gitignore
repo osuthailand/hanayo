@@ -14,10 +14,6 @@ semantic/gulpfile.tmp.*.js
 static/oauth-apps/*
 !static/oauth-apps/.keep
 
-<<<<<<< HEAD
 # Hanayo Video, it's too big to be here fuc
-=======
-# Homeapge Videos, its too big
->>>>>>> d8ff0c6... Fine, it's too big
 static/images/peniswhore.mp4
 static/images/peniswhorev1.mp4
