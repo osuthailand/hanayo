@@ -108,7 +108,6 @@
 						<div class="ui segment">
 							<div class="ui sixteen stackable grid">
 								<div class="sixteen wide column">
-
 									{{ $global.T "<b>%s</b> is a" .username | html}}
 
 									{{ $owner := (has .privileges 3145727) }}
@@ -298,14 +297,13 @@
 	                        </div>
 	                    </div>
 	                </div>
-									<script> var mode = {{ $favouritemode }}; </script>
+					<script> var mode = {{ $favouritemode }}; </script>
 					{{ end }}
 				{{ end }}
 			<script>
 				var userID = {{ .UserID }};
 				var personalID = {{ .Context.User.ID }};
 				var allowed = {{ .Allowedtoreport }};
-
 				var rx = 1;
 				var pythonApi = {{ .Conf.PythonAPI }};
 			</script>

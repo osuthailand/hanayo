@@ -13,3 +13,7 @@ semantic/gulpfile.tmp.*.js
 /_
 static/oauth-apps/*
 !static/oauth-apps/.keep
+
+# Hanayo Video, it's too big to be here fuc
+static/images/peniswhore.mp4
+static/images/peniswhorev1.mp4
