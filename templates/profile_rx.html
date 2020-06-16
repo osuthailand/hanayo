@@ -11,7 +11,7 @@
 					<meta property="og:url" content="https://ainu.pw/u/{{ .id }}" />
 					<meta property="og:title" content={{ $global.T "<b>%s</b>" .username}} />
 					<meta property="og:description" content={{ $global.T "<b>%s</b> is a osu!Ainu player from <b>%s</b>." .username (country .country true)}} />
-					<meta property="og:image" content="https://a.ainu.pw/{{ .id }}" />
+					<meta property="og:image" content="{{ config "AvatarURL" }}/{{ .id }}" />
 					<script>
 						window.favouriteMode = {{ $favouritemode }};
 						window.userID = {{ .id }};
@@ -44,7 +44,7 @@
 										{{ if eq $global.UserID $global.Context.User.ID }}
 										<a href="/settings/avatar">
 										{{ end }}
-												<img src="https://a.ainu.pw/{{ .id }}" alt="avatar" class="rounded-avatar kpw--profile--avatar">
+												<img src="{{ config "AvatarURL" }}/{{ .id }}" alt="avatar" class="rounded-avatar kpw--profile--avatar">
 										{{ if eq $global.UserID $global.Context.User.ID }}
 											</a>
 										{{ end }}
