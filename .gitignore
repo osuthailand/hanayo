@@ -4,5 +4,7 @@ hanayo.conf
 team.json
 semantic/gulpfile.tmp.*.js
 /_
+static/profbackgrounds/*
 static/oauth-apps/*
 !static/oauth-apps/.keep
+!static/profbackgrounds/.keep
