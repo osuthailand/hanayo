@@ -349,5 +349,5 @@ func generateEngine() *gin.Engine {
 }
 
 const alwaysRespondText = `Ooops! Looks like something went really wrong while trying to process your request.
-Perhaps report this to a Ainu developer?
+Perhaps report this to someone on The Realm developer team?
 Retrying doing again what you were trying to do might work, too.`
