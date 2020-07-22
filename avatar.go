@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"image"
-	"image/gif"
+	_ "image/gif"
 	_ "image/jpeg"
 	"image/png"
 	"os"
@@ -37,7 +37,7 @@ func avatarSubmit(c *gin.Context) {
 		return
 	}
 	img = resize.Thumbnail(256, 256, img, resize.Bilinear)
-	f, err := os.Create(fmt.Sprintf("%s/%d.gif", config.AvatarsFolder, ctx.User.ID))
+	f, err := os.Create(fmt.Sprintf("%s/%d.png", config.AvatarsFolder, ctx.User.ID))
 	defer f.Close()
 	if err != nil {
 		m = errorMessage{T(c, "An error occurred.")}
