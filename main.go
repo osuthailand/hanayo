@@ -22,12 +22,12 @@ import (
 	"gopkg.in/mailgun/mailgun-go.v1"
 	"gopkg.in/redis.v5"
 	"zxq.co/ripple/agplwarning"
-	"zxq.co/ripple/hanayo/modules/btcaddress"
-	"zxq.co/ripple/hanayo/modules/btcconversions"
-	"zxq.co/ripple/hanayo/routers/oauth"
-	"zxq.co/ripple/hanayo/routers/pagemappings"
-	"zxq.co/ripple/hanayo/services"
-	"zxq.co/ripple/hanayo/services/cieca"
+	"github.com/osuthailand/hanayo/modules/btcaddress"
+	"github.com/osuthailand/hanayo/modules/btcconversions"
+	"github.com/osuthailand/hanayo/routers/oauth"
+	"github.com/osuthailand/hanayo/routers/pagemappings"
+	"github.com/osuthailand/hanayo/services"
+	"github.com/osuthailand/hanayo/services/cieca"
 	"zxq.co/ripple/schiavolib"
 	"zxq.co/x/rs"
 )
@@ -44,6 +44,7 @@ var (
 		AvatarURL       string
 		BaseURL         string
 		API             string
+		PythonAPI		string
 		BanchoAPI       string `description:"Bancho base url (without /api) that hanayo will use to contact bancho"`
 		BanchoAPIPublic string `description:"same as above but this will be put in js files and used by clients. Must be publicly accessible. Leave empty to set to BanchoAPI"`
 		CheesegullAPI   string
@@ -121,16 +122,17 @@ func main() {
 	var configDefaults = map[*string]string{
 		&config.ListenTo:         ":6969",
 		&config.CookieSecret:     rs.String(46),
-		&config.AvatarURL:        "https://a.theosurealm.tk",
-		&config.BaseURL:          "https://theosurealm.tk",
-		&config.BanchoAPI:        "https://c.theosurealm.tk",
+		&config.AvatarURL:        "https://a.ainu.pw",
+		&config.BaseURL:          "https://ainu.pw",
+		&config.BanchoAPI:        "https://c.ainu.pw",
 		&config.CheesegullAPI:    "https://storage.ainu.pw/api",
 		&config.API:              "http://localhost:40001/api/v1/",
+		&config.PythonAPI:		  "https://api.ainu.pw/api",
 		&config.APISecret:        "Potato",
 		&config.IP_API:           "https://ip.zxq.co",
-		&config.DiscordServer:    "https://https://discord.gg/ts56dAt",
+		&config.DiscordServer:    "https://discord.gg/Qp3WQU8",
 		&config.MainRippleFolder: "/root/ripple/",
-		&config.MailgunFrom:      `"Realm" <theosurealm@gmail.com>`,
+		&config.MailgunFrom:      `"Ainu" <noreply@ripple.moe>`,
 	}
 	for key, value := range configDefaults {
 		if *key == "" {
@@ -287,6 +289,7 @@ func generateEngine() *gin.Engine {
 	r.GET("/clans/create", ccreate)
 	r.POST("/clans/create", ccreateSubmit)
 
+	r.POST("/report", reportUser)
 	r.GET("/u/:user", userProfile)
 	r.GET("/rx/u/:user", relaxProfile)
 	r.GET("/c/:cid", clanPage)
